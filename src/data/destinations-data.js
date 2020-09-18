@@ -1,4 +1,4 @@
-let destinations = [
+let destinationData = [
   {
   "id": 22,
   "destination": "Rome, Italy",
@@ -24,3 +24,5 @@ let destinations = [
 "alt": "brown concrete gate"
 },
 ]
+
+export default destinationData;
