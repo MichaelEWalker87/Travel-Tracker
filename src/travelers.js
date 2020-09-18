@@ -4,11 +4,11 @@ class Travelers {
     this.travelerType = traveler.travelerType; //(string)
     this.userName = traveler.userName; // (string)
     this.password = traveler.password; // (string)
-    this.past =  traveler.past; //  ([] of {})
-    this.present =  traveler.present; // ([] of {})
-    this.upcoming =  traveler.upcoming; // ([] of {})
-    this.pending =  traveler.pending; // ([] of {})
-    this.travelersTotal =  traveler.travelersTotal; //(number)
+    this.past = []; //  ([] of {}) traveler.past
+    this.present = []; // ([] of {}) traveler.present
+    this.upcoming = []; // ([] of {}) traveler.upcoming
+    this.pending = []; // ([] of {}) traveler.pending
+    this.travelersTotal = 0; //(number) traveler.travelersTotal
   }
 
   passwordUpdate() {
