@@ -4,7 +4,7 @@ import Trips from '../src/trips';
 import tripsData from '../src/data/trips-data';
 
 describe('Trips', () => {
-  let trip, trip2, trip3
+  let trip, trip2, trip3;
   beforeEach(() => {
     trip = new Trips(tripsData[0]);
     trip2 = new Trips(tripsData[1]);
