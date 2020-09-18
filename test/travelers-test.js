@@ -37,5 +37,25 @@ describe('Travelers', () => {
     it("should be able to store a user id", () => {
       expect(traveler.id).to.be.equal(1);
     });
+
+    it("should start with no past trips", () => {
+      expect(traveler.past).to.deep.equal([]);
+    });
+
+    it("should start with no present trips", () => {
+      expect(traveler.present).to.deep.equal([]);
+    });
+
+    it("should start with no upcoming trips", () => {
+      expect(traveler.upcoming).to.deep.equal([]);
+    });
+
+    it("should start with no pending trips", () => {
+      expect(traveler.pending).to.deep.equal([]);
+    });
+
+    it("should start with no pending trips", () => {
+      expect(traveler.travelersTotal).to.be.equal(0);
+    });
   });
 });
