@@ -34,20 +34,20 @@ class Travelers {
     });
   };
 
+  loadTravelerPending() { //not tested yet
+    this.userTotalTrips.forEach((trip) => {
+      if(trip.status === "pending") {
+        this.pending.push(trip)
+      }
+    });
+  };
+
   loadTravelerPresent() {
 
   };
 
   loadTravelerUpcoming() {
 
-  };
-
-  loadTravelerPending() { //not tested yet
-    this.userTotalTrips.forEach((trip) => {
-      if(trip.status === "pending") {
-        this.past.push(trip)
-      }
-    });
   };
 
   passwordUpdate() {

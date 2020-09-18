@@ -80,11 +80,11 @@ describe('Travelers', () => {
       expect(traveler2.past.length).to.be.equal(5);
     });
 
-    // it("should be able to get past trips for a user", () => {
-    //   traveler2.getUserTripData(tripsData);
-    //   traveler2.loadTravelerPast();
-    //
-    //   expect(traveler2.past.length).to.be.equal(5);
-    // });
+    it("should be able to get past trips for a user", () => {
+      traveler3.getUserTripData(tripsData);
+      traveler3.loadTravelerPending();
+
+      expect(traveler3.pending.length).to.be.equal(1);
+    });
   });
 });
