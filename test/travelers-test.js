@@ -1,7 +1,9 @@
 import { expect } from 'chai';
+import moment from 'moment';
 
 import Travelers from '../src/travelers';
 import travelerData from '../src/data/travelers-data';
+import tripsData from '../src/data/trips-data';
 
 describe('Travelers', () => {
   let traveler, traveler2, traveler3;
@@ -38,6 +40,10 @@ describe('Travelers', () => {
       expect(traveler.id).to.be.equal(1);
     });
 
+    it("should start with no trips in total trips", () => {
+      expect(traveler.userTotalTrips).to.deep.equal([]);
+    });
+
     it("should start with no past trips", () => {
       expect(traveler.past).to.deep.equal([]);
     });
@@ -60,6 +66,13 @@ describe('Travelers', () => {
   });
 
   describe('Methods of Travelers', () => {
+
+    it("should start with no be able to get total trips for a user", () => {
+      traveler2.getUserTripData(tripsData);
+
+      expect(traveler2.userTotalTrips.length).to.be.equal(2);
+    });
+
     
   });
 });
