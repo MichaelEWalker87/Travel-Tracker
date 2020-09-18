@@ -43,7 +43,11 @@ class Travelers {
   };
 
   loadTravelerPending() { //not tested yet
-
+    this.userTotalTrips.forEach((trip) => {
+      if(trip.status === "pending") {
+        this.past.push(trip)
+      }
+    });
   };
 
   passwordUpdate() {
