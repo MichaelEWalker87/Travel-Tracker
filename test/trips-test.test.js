@@ -53,4 +53,8 @@ describe('Trips', () => {
       expect(trip.suggestedActivities).to.deep.equal([]);
     });
   });
+
+  describe('Methods of Trips', () => {
+
+  });
 });

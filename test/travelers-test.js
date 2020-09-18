@@ -58,4 +58,8 @@ describe('Travelers', () => {
       expect(traveler.travelersTotal).to.be.equal(0);
     });
   });
+
+  describe('Methods of Travelers', () => {
+    
+  });
 });
