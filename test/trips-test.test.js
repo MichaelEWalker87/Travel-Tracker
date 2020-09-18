@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import moment from 'moment';
 
 import Trips from '../src/trips';
 import tripsData from '../src/data/trips-data';
@@ -52,9 +53,19 @@ describe('Trips', () => {
     it("should be able to store the trip duration", () => {
       expect(trip.suggestedActivities).to.deep.equal([]);
     });
+
+    it("should be able to calculate the end date of trip", () => {
+      expect(trip.endDate).to.be.equal("2019/09/24");
+    });
+    
   });
 
   describe('Methods of Trips', () => {
+
+    // it("should be able to store the trip duration", () => {
+    //   trip.getUserTripData(tripsData)
+    //   expect(trip.suggestedActivities).to.be.equal(0);
+    // });
 
   });
 });
