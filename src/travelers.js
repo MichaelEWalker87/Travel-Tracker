@@ -1,9 +1,10 @@
 class Travelers {
   constructor(traveler) {
-    this.id =  traveler.id; //(number)
+    this.id = traveler.id; //(number)
     this.travelerType = traveler.travelerType; //(string)
-    this.userName = traveler.userName; // (string)
-    this.password = traveler.password; // (string)
+    this.name = traveler.name;
+    this.userName = ""; // (string) traveler.userName
+    this.password = ""; // (string) traveler.password
     this.past = []; //  ([] of {}) traveler.past
     this.present = []; // ([] of {}) traveler.present
     this.upcoming = []; // ([] of {}) traveler.upcoming

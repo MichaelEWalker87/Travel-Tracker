@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 
 import Travelers from '../src/travelers';
-import travelers from '../src/data/travelers-data';
+import travelerData from '../src/data/travelers-data';
 
 describe('Travelers', () => {
   let traveler, traveler2, traveler3
   beforeEach(() => {
-    traveler = new Travelers(travelers[1])
-    traveler2 = new Travelers(travelers[2])
-    traveler2 = new Travelers(travelers[3])
+    traveler = new Travelers(travelerData[0]);
+    traveler2 = new Travelers(travelerData[1]);
+    traveler3 = new Travelers(travelerData[2]);
   });
 
   it("should be a function", () => {
