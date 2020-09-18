@@ -67,12 +67,24 @@ describe('Travelers', () => {
 
   describe('Methods of Travelers', () => {
 
-    it("should start with no be able to get total trips for a user", () => {
+    it("should be able to get total trips for a user", () => {
       traveler2.getUserTripData(tripsData);
 
-      expect(traveler2.userTotalTrips.length).to.be.equal(2);
+      expect(traveler2.userTotalTrips.length).to.be.equal(7);
     });
 
-    
+    it("should be able to get past trips for a user", () => {
+      traveler2.getUserTripData(tripsData);
+      traveler2.loadTravelerPast();
+
+      expect(traveler2.past.length).to.be.equal(5);
+    });
+
+    // it("should be able to get past trips for a user", () => {
+    //   traveler2.getUserTripData(tripsData);
+    //   traveler2.loadTravelerPast();
+    //
+    //   expect(traveler2.past.length).to.be.equal(5);
+    // });
   });
 });

@@ -13,43 +13,46 @@ class Travelers {
     this.upcoming = []; // ([] of {}) traveler.upcoming
     this.pending = []; // ([] of {}) traveler.pending
     this.travelersTotal = 0; //(number) traveler.travelersTotal
-  }
+  };
 
   getUserTripData(tripsData) {
-    this.usersTrips = tripsData.forEach((trip) => {
+     tripsData.forEach((trip) => {
       if(trip.userID === this.id) {
-        this.userTotalTrips.push(tripsData)
+        this.userTotalTrips.push(trip)
       }
     });
-  }
+  };
 
   loadTravelerPast() {
-  // const start = Date.now();
-  // let now = new Date(start)
-  // tripsData.forEach((item, i) => {
-  //   if(tripsData.id === this.id && tripsData.date)
-  // });
-  }
+    const start = Date.now();
+    let now = new Date(start)
+    this.userTotalTrips.forEach((trip) => {
+      let tripDate = new Date(trip.date)
+      if(tripDate < now) {
+        this.past.push(trip)
+      }
+    });
+  };
 
   loadTravelerPresent() {
 
-  }
+  };
 
   loadTravelerUpcoming() {
 
-  }
+  };
 
-  loadTravelerPending() {
+  loadTravelerPending() { //not tested yet
 
-  }
+  };
 
   passwordUpdate() {
 
-  }
+  };
 
   userNameUpdate() {
 
-  }
+  };
 }
 
 export default Travelers;
