@@ -27,7 +27,7 @@ describe('Trips', () => {
     });
 
     it("should be able to store another trip id", () => {
-      expect(trip2.id).to.be.equal(3);
+      expect(trip2.id).to.be.equal(2);
     });
 
     it("should be able to store a user id", () => {
@@ -57,7 +57,7 @@ describe('Trips', () => {
     it("should be able to calculate the end date of trip", () => {
       expect(trip.endDate).to.be.equal("2019/09/24");
     });
-    
+
   });
 
   describe('Methods of Trips', () => {
