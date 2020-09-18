@@ -11,6 +11,7 @@ describe('Travelers', () => {
     traveler3 = new Travelers(travelerData[2]);
   });
 
+
   it("should be a function", () => {
     expect(Travelers).to.be.a("function");
   });
@@ -19,23 +20,22 @@ describe('Travelers', () => {
     expect(traveler).to.be.an.instanceOf(Travelers);
   });
 
-  it("should be an instance of Travelers", () => {
-    expect(traveler).to.be.an.instanceOf(Travelers);
-  });
+  describe('Properties of Travelers', () => {
 
-  it("should be able to store a name", () => {
-    expect(traveler.name).to.be.equal("Ham Leadbeater");
-  });
+    it("should be able to store a name", () => {
+      expect(traveler.name).to.be.equal("Ham Leadbeater");
+    });
 
-  it("should be able to store a name", () => {
-    expect(traveler.name).to.be.equal("Ham Leadbeater");
-  });
+    it("should be able to store another name", () => {
+      expect(traveler2.name).to.be.equal("Marijo MacNeilley");
+    });
 
-  it("should be able to store a user traveler type", () => {
-    expect(traveler.travelerType).to.be.equal("relaxer");
-  });
+    it("should be able to store a user traveler type", () => {
+      expect(traveler.travelerType).to.be.equal("relaxer");
+    });
 
-  it("should be able to store a user id", () => {
-    expect(traveler.id).to.be.equal(1);
+    it("should be able to store a user id", () => {
+      expect(traveler.id).to.be.equal(1);
+    });
   });
 });
