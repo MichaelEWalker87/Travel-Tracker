@@ -19,4 +19,23 @@ describe('Travelers', () => {
     expect(traveler).to.be.an.instanceOf(Travelers);
   });
 
+  it("should be an instance of Travelers", () => {
+    expect(traveler).to.be.an.instanceOf(Travelers);
+  });
+
+  it("should be able to store a name", () => {
+    expect(traveler.name).to.be.equal("Ham Leadbeater");
+  });
+
+  it("should be able to store a name", () => {
+    expect(traveler.name).to.be.equal("Ham Leadbeater");
+  });
+
+  it("should be able to store a user traveler type", () => {
+    expect(traveler.travelerType).to.be.equal("relaxer");
+  });
+
+  it("should be able to store a user id", () => {
+    expect(traveler.id).to.be.equal(1);
+  });
 });
