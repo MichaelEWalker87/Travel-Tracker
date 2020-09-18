@@ -4,7 +4,7 @@ import Travelers from '../src/travelers';
 import travelerData from '../src/data/travelers-data';
 
 describe('Travelers', () => {
-  let traveler, traveler2, traveler3
+  let traveler, traveler2, traveler3;
   beforeEach(() => {
     traveler = new Travelers(travelerData[0]);
     traveler2 = new Travelers(travelerData[1]);
