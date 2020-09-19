@@ -6,7 +6,7 @@ class Travelers {
     this.travelerType = traveler.travelerType; //(string)
     this.name = traveler.name;
     this.userName = ""; // (string) traveler.userName
-    this.password = ""; // (string) traveler.password
+    this.password = "travel2020"; // (string) traveler.password
     this.userTotalTrips = [];
     this.past = []; //  ([] of {}) traveler.past
     this.present = []; // ([] of {}) traveler.present
@@ -65,11 +65,11 @@ class Travelers {
     });
   };
 
-  passwordUpdate() {
+  userNameUpdate() {
 
   };
 
-  userNameUpdate() {
+  passwordUpdate() {
 
   };
 }

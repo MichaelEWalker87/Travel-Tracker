@@ -67,6 +67,10 @@ describe('Travelers', () => {
     it("should start with no pending trips", () => {
       expect(traveler.travelersTotal).to.be.equal(0);
     });
+
+    it("should start with a default password", () => {
+      expect(traveler.password).to.be.equal("travel2020");
+    });
   });
 
   describe('Methods of Travelers', () => {
@@ -97,9 +101,15 @@ describe('Travelers', () => {
       expect(traveler2.present.length).to.be.equal(1);
     });
 
-    it("should be able to get present trips for a user", () => {
+    it("should be able to get upcoming trips for a user", () => {
       traveler3.getUserTripData(tripsData);
       traveler3.loadTravelerUpcoming();
+
+      expect(traveler3.upcoming.length).to.be.equal(1);
+    });
+
+    it("should make a default user name for a user", () => {
+      traveler.passwordUpdate();
 
       expect(traveler3.upcoming.length).to.be.equal(1);
     });
