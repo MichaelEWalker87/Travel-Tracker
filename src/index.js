@@ -23,7 +23,7 @@ import './images/past.png'
 import './images/order.png'
 import './images/home.png'
 import './images/future.png'
-import './images/future.png'
+import './images/burger.png'
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
