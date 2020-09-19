@@ -5,7 +5,7 @@ class Travelers {
     this.id = traveler.id; //(number)
     this.travelerType = traveler.travelerType; //(string)
     this.name = traveler.name;
-    this.userName = ""; // (string) traveler.userName
+    this.username = `traveler${this.id}`; // (string) traveler.userName
     this.password = "travel2020"; // (string) traveler.password
     this.userTotalTrips = [];
     this.past = []; //  ([] of {}) traveler.past

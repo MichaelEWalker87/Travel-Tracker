@@ -71,6 +71,10 @@ describe('Travelers', () => {
     it("should start with a default password", () => {
       expect(traveler.password).to.be.equal("travel2020");
     });
+
+    it("should start with a default username", () => {
+      expect(traveler.username).to.be.equal("traveler1");
+    });
   });
 
   describe('Methods of Travelers', () => {
