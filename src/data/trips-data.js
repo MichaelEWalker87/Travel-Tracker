@@ -1,5 +1,5 @@
 let tripsData = [
-  { 
+  {
   "id": 1,
   "userID": 44,
   "destinationID": 49,
@@ -1997,6 +1997,16 @@ let tripsData = [
   "date": "2020/06/29",
   "duration": 7,
   "status": "approved",
+  "suggestedActivities": []
+},
+  {
+  "id": 201,
+  "userID": 44,
+  "destinationID": 33,
+  "travelers": 2,
+  "date": "2020/08/24",
+  "duration": 11,
+  "status": "pending",
   "suggestedActivities": []
   }
 ]
