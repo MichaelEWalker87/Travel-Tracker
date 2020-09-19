@@ -77,12 +77,12 @@ describe('Trips', () => {
 
     it("should be able to calculate the price for a trip", () => {
       trip.calculatePrice(destinationData)
-      expect(trip.price).to.be.equal('12969.00');
+      expect(trip.price).to.be.equal(12969);
     });
 
     it("should be able to calculate the agentFee for a trip", () => {
       trip.calculatePrice(destinationData)
-      expect(trip.agentFee).to.be.equal('1179.00');
-    });
+      expect(trip.agentFee).to.be.equal(1179);
+    }); 
   });
 });
