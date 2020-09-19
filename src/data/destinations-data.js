@@ -24,14 +24,12 @@ let destinationData = [
     "alt": "brown concrete gate"
   },
   {
-    "id": 1,
-    "userID": 44,
-    "destinationID": 49,
-    "travelers": 1,
-    "date": "2019/09/16",
-    "duration": 8,
-    "status": "approved",
-    "suggestedActivities": []
+  "id": 49,
+  "destination": "Castries, St Lucia",
+  "estimatedLodgingCostPerDay": 650,
+  "estimatedFlightCostPerPerson": 90,
+  "image": "https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80",
+  "alt": "aerial photography of rocky mountain under cloudy sky"
   },
 ]
 
