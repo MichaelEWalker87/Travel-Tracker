@@ -8,4 +8,5 @@ class Destinations {
     this.alt = getAway.alt //string
   }
 }
-module.exports = Destinations;
+
+export default Destinations;

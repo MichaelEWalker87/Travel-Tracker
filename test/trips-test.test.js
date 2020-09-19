@@ -2,7 +2,9 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import Trips from '../src/trips';
+import Destinations from '../src/trips';
 import tripsData from '../src/data/trips-data';
+import destinationData from '../src/data/destinations-data';
 
 describe('Trips', () => {
   let trip, trip2, trip3;
@@ -62,10 +64,9 @@ describe('Trips', () => {
 
   describe('Methods of Trips', () => {
 
-    // it("should be able to store the trip duration", () => {
-    //   trip.getUserTripData(tripsData)
-    //   expect(trip.suggestedActivities).to.be.equal(0);
-    // });
+    it("should be able to store the trip duration", () => {
+      console.log(destinationData)
+    });
 
   });
 });

@@ -6,6 +6,7 @@ import Trips from '../src/trips';
 import travelerData from '../src/data/travelers-data';
 import tripsData from '../src/data/trips-data';
 
+
 describe('Travelers', () => {
   let traveler, traveler2, traveler3, trips;
   beforeEach(() => {

@@ -15,7 +15,7 @@ class Trips {
   }
 
   calculatePrice() {
-
+    
   }
 
   submitRequest() {
