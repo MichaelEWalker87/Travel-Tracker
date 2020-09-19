@@ -2,15 +2,19 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import Travelers from '../src/travelers';
+import Trips from '../src/trips';
 import travelerData from '../src/data/travelers-data';
 import tripsData from '../src/data/trips-data';
 
 describe('Travelers', () => {
-  let traveler, traveler2, traveler3;
+  let traveler, traveler2, traveler3, trips;
   beforeEach(() => {
     traveler = new Travelers(travelerData[0]);
     traveler2 = new Travelers(travelerData[1]);
     traveler3 = new Travelers(travelerData[2]);
+    trips = [new Trips(tripsData[0]), new Trips(tripsData[45]),
+      new Trips(tripsData[47])
+    ];
   });
 
 
@@ -85,6 +89,12 @@ describe('Travelers', () => {
       traveler3.loadTravelerPending();
 
       expect(traveler3.pending.length).to.be.equal(1);
+    });
+
+    it("should be able to get present trips for a user", () => {
+      traveler2.loadTravelerPresent(trips);
+
+      expect(traveler2.present.length).to.be.equal(1);
     });
   });
 });
