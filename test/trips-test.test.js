@@ -39,11 +39,11 @@ describe('Trips', () => {
     });
 
     it("should be able to store date of trip", () => {
-      expect(trip.date).to.be.equal("2019/09/16");
+      expect(trip.date).to.be.equal("2020/09/16");
     });
 
     it("should be able to store the trip duration", () => {
-      expect(trip.duration).to.be.equal(8);
+      expect(trip.duration).to.be.equal(18);
     });
 
     it("should be able to store the trip duration", () => {
@@ -55,7 +55,7 @@ describe('Trips', () => {
     });
 
     it("should be able to calculate the end date of trip", () => {
-      expect(trip.endDate).to.be.equal("2019/09/24");
+      expect(trip.endDate).to.be.equal("2020/10/04");
     });
 
   });

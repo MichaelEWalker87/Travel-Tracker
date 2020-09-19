@@ -11,7 +11,7 @@ class Trips {
     this.suggestedActivities = trip.suggestedActivities ; // array
     this.endDate = moment(this.date, "YYYY/MM/DD")
                     .add(this.duration, 'days')
-                    .format("YYYY/MM/DD")
+                    .format("YYYY/MM/DD");
   }
 
   selectDate() {
