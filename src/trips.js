@@ -4,7 +4,7 @@ class Trips {
   constructor(trip) {
     this.id = trip.id;  // number
     this.userID = trip.userID;  // number
-    
+    this.destinationID = trip.destinationID
     this.travelers = trip.travelers;  // number
     this.date = trip.date;  // string
     this.duration = trip.duration; // number

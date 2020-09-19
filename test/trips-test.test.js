@@ -63,6 +63,10 @@ describe('Trips', () => {
     it("should start with the price of trip being zero", () => {
       expect(trip.price).to.be.equal(0);
     });
+
+    it("should start with the price of trip being zero", () => {
+      expect(trip.destinationID).to.be.equal(49);
+    });
   });
 
   describe('Methods of Trips', () => {
