@@ -27,8 +27,8 @@ class Travelers {
     const start = Date.now();
     let now = new Date(start)
     this.userTotalTrips.forEach((trip) => {
-      let tripDate = new Date(trip.date)
-      if(tripDate < now) {
+      let tripDate = new Date(trip.endDate)
+      if(tripDate < now && trip.status !== "pending") {
         this.past.push(trip)
       }
     });
@@ -63,6 +63,10 @@ class Travelers {
         this.upcoming.push(trip)
       }
     });
+  };
+
+  calculateTravelersTotalPrice() {
+
   };
 
   userNameUpdate() {

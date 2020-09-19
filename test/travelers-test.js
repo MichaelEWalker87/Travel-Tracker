@@ -14,7 +14,7 @@ describe('Travelers', () => {
     traveler2 = new Travelers(travelerData[1]);
     traveler3 = new Travelers(travelerData[2]);
     trips = [new Trips(tripsData[0]), new Trips(tripsData[45]),
-      new Trips(tripsData[47])
+      new Trips(tripsData[47]), new Trips(tripsData[200])
     ];
   });
 
@@ -83,14 +83,14 @@ describe('Travelers', () => {
     it("should be able to get total trips for a user", () => {
       traveler2.getUserTripData(tripsData);
 
-      expect(traveler2.userTotalTrips.length).to.be.equal(7);
+      expect(traveler2.userTotalTrips.length).to.be.equal(8);
     });
 
     it("should be able to get past trips for a user", () => {
-      traveler2.getUserTripData(tripsData);
+      traveler2.getUserTripData(trips);
       traveler2.loadTravelerPast();
 
-      expect(traveler2.past.length).to.be.equal(5);
+      expect(traveler2.past.length).to.be.equal(1);
     });
 
     it("should be able to get past trips for a user", () => {
