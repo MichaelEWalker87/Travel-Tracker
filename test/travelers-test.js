@@ -3,8 +3,10 @@ import moment from 'moment';
 
 import Travelers from '../src/travelers';
 import Trips from '../src/trips';
+import Destinations from '../src/trips';
 import travelerData from '../src/data/travelers-data';
 import tripsData from '../src/data/trips-data';
+import destinationData from '../src/data/destinations-data';
 
 
 describe('Travelers', () => {
@@ -14,7 +16,8 @@ describe('Travelers', () => {
     traveler2 = new Travelers(travelerData[1]);
     traveler3 = new Travelers(travelerData[2]);
     trips = [new Trips(tripsData[0]), new Trips(tripsData[45]),
-      new Trips(tripsData[47]), new Trips(tripsData[200])
+      new Trips(tripsData[47]), new Trips(tripsData[200]),
+      new Trips(tripsData[161])
     ];
   });
 
@@ -86,7 +89,7 @@ describe('Travelers', () => {
       expect(traveler2.userTotalTrips.length).to.be.equal(8);
     });
 
-    it("should be able to get past trips for a user", () => {
+    it("should be able to get past trips for a user not in pending", () => {
       traveler2.getUserTripData(trips);
       traveler2.loadTravelerPast();
 
@@ -111,6 +114,13 @@ describe('Travelers', () => {
       traveler3.loadTravelerUpcoming();
 
       expect(traveler3.upcoming.length).to.be.equal(1);
+    });
+
+    it("should be able to get calculate users total price for the year", () => {
+      traveler2.getUserTripData(trips);
+      traveler2.calculateTravelersTotalPrice(destinationData);
+
+      expect(traveler2.travelersTotal).to.be.equal(61853);
     });
   });
 });

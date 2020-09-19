@@ -65,9 +65,19 @@ class Travelers {
     });
   };
 
-  calculateTravelersTotalPrice() {
-
+  calculateTravelersTotalPrice(destinationData) {
+    const thisYear = new Date(Date.now());
+    let yearlyTotal = this.userTotalTrips.reduce((total, trip) => {
+       trip.calculatePrice(destinationData);
+       let tripYear = new Date(trip.date)
+       if(thisYear.getFullYear() === tripYear.getFullYear()){
+          total += trip.price;
+       }
+       return total
+    }, 0);
+    this.travelersTotal = yearlyTotal;
   };
+
 
   userNameUpdate() {
 
