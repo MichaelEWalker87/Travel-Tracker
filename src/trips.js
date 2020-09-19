@@ -11,6 +11,7 @@ class Trips {
     this.status = trip.status; // string
     this.suggestedActivities = trip.suggestedActivities ; // array
     this.price = 0;
+    this.agentFee = 0;
     this.endDate = moment(this.date, "YYYY/MM/DD")
                     .add(this.duration, 'days')
                     .format("YYYY/MM/DD");
@@ -25,8 +26,9 @@ class Trips {
       +
       (this.travelers * selectedDestination.estimatedFlightCostPerPerson)
     )
-    let agentFee = (cost * 0.10);
-    let totalPrice = (((cost + agentFee) * 100) / 100).toFixed(2)
+    let agentFeeNumber = (cost * 0.10);
+    this.agentFee = (((cost * 0.10)* 100) / 100).toFixed(2);
+    let totalPrice = (((cost + agentFeeNumber) * 100) / 100).toFixed(2)
     this.price = totalPrice;
   }
 

@@ -65,6 +65,10 @@ describe('Trips', () => {
     });
 
     it("should start with the price of trip being zero", () => {
+      expect(trip.agentFee).to.be.equal(0);
+    });
+
+    it("should start with the price of trip being zero", () => {
       expect(trip.destinationID).to.be.equal(49);
     });
   });
@@ -74,6 +78,11 @@ describe('Trips', () => {
     it("should be able to calculate the price for a trip", () => {
       trip.calculatePrice(destinationData)
       expect(trip.price).to.be.equal('12969.00');
+    });
+
+    it("should be able to calculate the agentFee for a trip", () => {
+      trip.calculatePrice(destinationData)
+      expect(trip.agentFee).to.be.equal('1179.00');
     });
   });
 });
