@@ -18,8 +18,8 @@ let destinationData = [
 {
 "id": 33,
 "destination": "Brussels, Belgium",
-"estimatedLodgingCostPerDay": 1000,
-"estimatedFlightCostPerPerson": 110,
+"estLodgingCostPerDay": 1000,
+"estFlightCostPerPerson": 110,
 "image": "https://images.unsplash.com/photo-1559113202-c916b8e44373?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
 "alt": "brown concrete gate"
 },
