@@ -60,12 +60,16 @@ describe('Trips', () => {
       expect(trip.endDate).to.be.equal("2020/10/04");
     });
 
+    it("should start with the price of trip being zero", () => {
+      expect(trip.price).to.be.equal(0);
+    });
   });
 
   describe('Methods of Trips', () => {
 
-    it("should be able to store the trip duration", () => {
-      console.log(destinationData)
+    it("should be able to calculate the price for a trip", () => {
+      trip.calculatePrice(destinationData)
+      expect(trip.price).to.be.equal(1586);
     });
 
   });

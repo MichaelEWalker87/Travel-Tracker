@@ -38,7 +38,7 @@ describe('Destinations', () => {
     });
 
     it("should be able to store estimated flight cost per person", () => {
-      expect(destination2.estimatedFlightCostPerPerson).to.be.equal(200);
+      expect(destination2.estFlightCostPerPerson).to.be.equal(200);
     });
 
     it("should be able to store another destination image", () => {
