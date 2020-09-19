@@ -42,8 +42,16 @@ class Travelers {
     });
   };
 
-  loadTravelerPresent() {
-
+  loadTravelerPresent(trips) {
+    const start = Date.now();
+    let now = new Date(start)
+    trips.forEach((trip) => {
+      let tripDate = new Date(trip.date)
+      let tripEnd = new Date(trip.endDate)
+      if(tripDate <= now && tripEnd >= now && trip.status === 'approved') {
+        this.present.push(trip)
+      }
+    });
   };
 
   loadTravelerUpcoming() {
