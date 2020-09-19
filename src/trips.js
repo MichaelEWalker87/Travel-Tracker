@@ -17,17 +17,17 @@ class Trips {
   }
 
   calculatePrice(destinationData) {
-    // let selected = destinationData.find((destination) => {
-    //   return destination.
-    // })
-    // let cost = (
-    //   (this.duration * destinationData.estimatedLodgingCostPerDay * this.travelers)
-    //   +
-    //   (this.travelers * destinationData.estimatedFlightCostPerPerson)
-    // )
-    // this.price = Math.round(((cost * 0.1) + cost) * 100)/100
-    //
-    // console.log(destinationData)
+    let selectedDestination = destinationData.find(destination => {
+      return  this.destinationID === destination.id
+    })
+    let cost = (
+      (this.duration * selectedDestination.estimatedLodgingCostPerDay * this.travelers)
+      +
+      (this.travelers * selectedDestination.estimatedFlightCostPerPerson)
+    )
+    let agentFee = (cost * 0.10);
+    let totalPrice = (((cost + agentFee) * 100) / 100).toFixed(2)
+    this.price = totalPrice;
   }
 
   submitRequest() {

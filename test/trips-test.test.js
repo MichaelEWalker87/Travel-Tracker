@@ -73,8 +73,7 @@ describe('Trips', () => {
 
     it("should be able to calculate the price for a trip", () => {
       trip.calculatePrice(destinationData)
-      expect(trip.price).to.be.equal(1586);
+      expect(trip.price).to.be.equal('12969.00');
     });
-
   });
 });
