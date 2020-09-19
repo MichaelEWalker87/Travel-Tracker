@@ -111,11 +111,5 @@ describe('Travelers', () => {
 
       expect(traveler3.upcoming.length).to.be.equal(1);
     });
-
-    it("should make a default user name for a user", () => {
-      traveler.passwordUpdate();
-
-      expect(traveler3.upcoming.length).to.be.equal(1);
-    });
   });
 });
