@@ -14,22 +14,6 @@ class Trips {
                     .format("YYYY/MM/DD");
   }
 
-  selectDate() {
-
-  }
-
-  selectDuration() {
-
-  }
-
-  selectNumTravelers() {
-
-  }
-
-  chooseDestination() {
-
-  }
-
   calculatePrice() {
 
   }
