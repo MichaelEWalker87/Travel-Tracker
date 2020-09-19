@@ -8,7 +8,7 @@ class Trips {
     this.travelers = trip.travelers;  // number
     this.date = trip.date;  // string
     this.duration = trip.duration; // number
-    this.status = trip.status; // string
+    this.status = trip.status || "pending"; // string
     this.suggestedActivities = trip.suggestedActivities ; // array
     this.price = 0;
     this.agentFee = 0;
@@ -21,14 +21,18 @@ class Trips {
     let selectedDestination = destinationData.find(destination => {
       return  this.destinationID === destination.id
     })
+
     let cost = (
+
       (this.duration * selectedDestination.estimatedLodgingCostPerDay * this.travelers)
       +
       (this.travelers * selectedDestination.estimatedFlightCostPerPerson)
     )
+    // console.log(cost)
     let agentFeeNumber = (cost * 0.10);
-    this.agentFee = (((cost * 0.10)* 100) / 100).toFixed(2);
-    let totalPrice = (((cost + agentFeeNumber) * 100) / 100).toFixed(2)
+    // console.log(agentFeeNumber)
+    this.agentFee = (Math.round(((cost * 0.10)* 100)) / 100);
+    let totalPrice = (Math.round(((cost + agentFeeNumber) * 100)) / 100)
     this.price = totalPrice;
   }
 
