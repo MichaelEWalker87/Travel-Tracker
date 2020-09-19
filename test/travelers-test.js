@@ -96,5 +96,12 @@ describe('Travelers', () => {
 
       expect(traveler2.present.length).to.be.equal(1);
     });
+
+    it("should be able to get present trips for a user", () => {
+      traveler3.getUserTripData(tripsData);
+      traveler3.loadTravelerUpcoming();
+
+      expect(traveler3.upcoming.length).to.be.equal(1);
+    });
   });
 });

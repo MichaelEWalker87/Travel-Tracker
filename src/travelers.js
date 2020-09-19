@@ -34,7 +34,7 @@ class Travelers {
     });
   };
 
-  loadTravelerPending() { //not tested yet
+  loadTravelerPending() {
     this.userTotalTrips.forEach((trip) => {
       if(trip.status === "pending") {
         this.pending.push(trip)
@@ -55,7 +55,14 @@ class Travelers {
   };
 
   loadTravelerUpcoming() {
-
+    const start = Date.now();
+    let now = new Date(start)
+    this.userTotalTrips.forEach((trip) => {
+      let tripDate = new Date(trip.date)
+      if(tripDate > now && trip.status === 'approved') {
+        this.upcoming.push(trip)
+      }
+    });
   };
 
   passwordUpdate() {
