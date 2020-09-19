@@ -34,7 +34,7 @@ describe('Destinations', () => {
     });
 
     it("should be able to store estimated lodging cost per day", () => {
-      expect(destination2.estimatedLodgingCostPerDay).to.be.equal(175);
+      expect(destination2.estLodgingCostPerDay).to.be.equal(175);
     });
 
     it("should be able to store estimated flight cost per person", () => {
