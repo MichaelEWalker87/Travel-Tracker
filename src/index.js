@@ -55,6 +55,7 @@ let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");//not being used yet
 let travelersNumberPicker = document.querySelector(".travelers-number-picker");//not being used yet
 let travelersDurationPicker = document.querySelector(".travelers-duration-slider");//not being used yet
+let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
 
 
@@ -103,8 +104,46 @@ let generateTrips = () => {
 }
 
 let getData = () => {
-  
+
 }
+
+
+let setDestinationPicker = () => {
+
+}
+
+let captureSubmitedData = () => {
+  let calenderDate = calenderPicker.value.split("-")
+  let formatedDate = calenderDate.join("/")
+return {
+          id: Date.now(),
+          userID: 2,
+          destinationID: parseInt(destinationPicker.value),
+          travelers: parseInt(travelersNumberPicker.value),
+          date: formatedDate,
+          duration: parseInt(travelersDurationPicker.value),
+          status: 'pending',
+          suggestedActivities: []
+        }
+}
+
+let submitRequest = () => {
+  let newTrip = captureSubmitedData();
+  console.log(newTrip)
+  api.addTrip(newTrip)
+    .then(response => console.log(response));
+  //I want to capture the value of the input for the form feilds in the home page
+  // calender
+  //days
+  //travelers
+  //destination
+  //Post it
+  //get data
+  //update the current instations of trip
+  //redisplay
+}
+
 window.addEventListener('load', onLoadContent);
 // allIcons.addEventListener('click', );
 // loginButton.addEventListener('click', );
+submitTrip.addEventListener('click', submitRequest);
