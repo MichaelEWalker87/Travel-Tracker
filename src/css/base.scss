@@ -1,7 +1,76 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+//TEXT STYLING
+$title-font: 'Righteous', cursive; //font-family: 'Righteous', cursive;
+$main-font: 'Cabin', sans-serif; //font-family: 'Cabin', sans-serif;
+
+//COLOURS
+$white-in-cards: hsla(23, 15%, 95%, 1);
+$black-shadow-shadow: hsla(360, 5%, 0%, .7);
+$main-blue: hsla(209, 24%, 47%, 1);
+$green: hsla(151, 48%, 40%, 1);
+$dark-green: hsla(110, 85%, 15%, 1);
+$lime-green: hsla(78, 77%, 66%, 1);
+$deep-pink-h4: hsla(342, 95%, 25%, 1);
+$pale-blue: hsla(210, 38%, 86%, .7);
+$transition-slow: .8s ease;
 
 body {
-  background: $primary-background;
+  margin: 0;
 }
+
+
+.hidden {
+  display: none !important;
+}
+
+.moblie {
+  display: none !important;
+}
+
+.logo {
+  border-radius: 20%;
+  height: 10rem;
+  width: auto;
+}
+
+.logo-section {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  padding-top: 0.5rem;
+}
+
+.icon {
+  height: 3.5rem;
+  width: auto;
+}
+
+.header-section {
+  text-align: center;
+  align-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: $pale-blue;
+}
+
+.header-text-section {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  font-family: $title-font;
+  font-size: 1.2rem;
+  align-self: center;
+}
+
+.icon-section {
+  grid-row-start: 2;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  display: flex;
+  place-content: space-around;
+}
+
+/* This is an example of using Sass, otherwise plain CSS works too*/
+ $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+ ;
+
+ body {
+   background: $primary-background;
+ }
