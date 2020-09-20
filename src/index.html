@@ -63,44 +63,50 @@
         </button>
       </section>
     </header>
-    <section class="main-login">
-      <form action="/action_page.php">
-        <label for="user name" class="sign-in username-title">Travelers Username
-        </label>
-        <br>
-        <input
-          type="text" class="sign-in username" id="username"
-          placeholder="Username66"name="username" value=""
-        >
-        <br>
-        <label
-          for="password"class="sign-in password-title">Travelers Password
-        </label>
-        <br>
-        <input
-          type="password" class="sign-in password" id="password"
-          placeholder="Username66" name="password" value=""
-        >
-        <br>
-        <br>
-        <button type="button" class="login-button" name="Login">Login</button>
-      </form>
+    <section class="main-login hidden">
+      <section class="login-entry">
+        <form action="/action_page.php">
+          <label for="user name" class="sign-in username-title">Travelers Username
+          </label>
+          <br>
+          <input
+            type="text" class="sign-in username" id="username"
+            placeholder="Username66"name="username" value=""
+          >
+          <br>
+          <label
+            for="password"class="sign-in password-title">Travelers Password
+          </label>
+          <br>
+          <input
+            type="password" class="sign-in password" id="password"
+            placeholder="Username66" name="password" value=""
+          >
+          <br>
+          <br>
+          <button type="button" class="login-button" name="Login">Login</button>
+        </form>
+      </section>
       <img
         class="logo-login" src="../images/hop.png"
         alt="Good Work/Life Beer-lance Travel Agency Logo"
       >
     </section>
-    <section class="home hidden">
-      <label for="Destination">Choose A Destination:</label>
-      <select id="destination-dropdown" class="destination-picker">
+    <section class="home">
+      <label for="Destination" class="home-input">Choose A Destination:</label>
+      <select id="destination-dropdown" class="destination-picker home-input-form">
         <option value=22 selected>Rome, Italy</option>
         <option value=25>Brussels, Belgium</option>
         <option value=49>Castries, St Lucia</option>
         <option value=14>Marrakesh, Morocco</option>
       </select>
       <br>
-        <label for="travelers-number-dropdown">Choose Number Of Travelers:</label>
-        <select id="travelers-number-dropdown" class="travelers-number-picker">
+        <label for="travelers-number-dropdown" class="home-input">
+          Choose Number Of Travelers:
+        </label>
+        <select id="travelers-number-dropdown"
+          class="travelers-number-picker home-input-form"
+        >
           <option value=1>1 Travelers</option>
           <option value=2 selected>2 Travelers</option>
           <option value=3>3 Travelers</option>
@@ -117,25 +123,33 @@
           <option value=14>14 Travelers</option>
         </select>
       <section class="duration-picker">
-        <form action="/action_page.php" class="travelers-duration-picker">
-          <label for="quantity" class="travelers-duration-picker travelers-duration-title">
+        <form action="/action_page.php"
+          class="travelers-duration-picker home-input-form"
+        >
+          <label for="quantity" class=" home-input
+            travelers-duration-picker travelers-duration-title">
             Days wanting to travel (between 1 and 60):
           </label>
           <input
-            type="number" id="quantity" class="travelers-duration-picker travelers-duration-slider "
+            type="number" id="quantity"
+            class="travelers-duration-picker travelers-duration-slider home-input-form"
             name="quantity" min="1" max="60"
           >
         </form>
       </section>
-      <section class="calender-picker">
-        <label for="start-date" class="start-date-title">Start date:</label>
+      <section class="calender-picker home-input-form">
+        <label for="start-date" class="start-date-title home-input">
+          Start date:
+        </label>
         <input
           type="date" id="start" name="trip-start"
           value="2020-02-12" class="start-date-title calender"
-          min="2018-01-01" max="2030-12-31"
+          min="2018-01-01" max="2030-12-31" class="home-input-form"
         >
       </section>
-      <button type="button" class="submit-trip"name="Submit">Submit Request</button>
+      <button type="button" class="submit-trip home-input-form"
+        name="Submit">Submit Request
+      </button>
     </section>
     <section class="present hidden">
     </section>
