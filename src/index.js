@@ -50,7 +50,7 @@ let presentPage = document.querySelector(".present");//not being used yet
 let futurePage = document.querySelector(".future");//not being used yet
 let pastPage = document.querySelector(".past");//not being used yet
 let pendingPage = document.querySelector(".pending");//not being used yet
-let allIcons = document.querySelectorAll(".icon");//not being used yet
+let allIcons = document.querySelector(".header-section");//not being used yet
 let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");//not being used yet
 let travelersNumberPicker = document.querySelector(".travelers-number-picker");//not being used yet
@@ -77,9 +77,6 @@ let onLoadContent = () => {
     })
 }
 
-let selectIcon = (event) => {
-  let pickIcon = event.target.closest('.icon');
-}
 
 let generateTraveler = () =>{
   let currentTraveler = new Travelers(oneTraveler)
@@ -143,7 +140,24 @@ let submitRequest = () => {
   //redisplay
 }
 
+
+let selectNavIcon = () => {
+  if(event.target.classList.contains('present-trips')) {
+    console.log("present-trips")
+  } else if (event.target.classList.contains('home-page')) {
+    console.log("home-page")
+  } else if (event.target.classList.contains('future-trips')) {
+    console.log("future-trips")
+  } else if (event.target.classList.contains('pending-trips')) {
+    console.log("pending-trips")
+  } else if (event.target.classList.contains('past-trips')) {
+    console.log("past-trips")
+  } else if (event.target.classList.contains('moblie-icon')) {
+    console.log("moblie-icon")
+  }
+}
+
 window.addEventListener('load', onLoadContent);
-// allIcons.addEventListener('click', );
+allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
-submitTrip.addEventListener('click', submitRequest);
+// submitTrip.addEventListener('click', submitRequest);
