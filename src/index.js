@@ -121,21 +121,23 @@ let populatePresentPage = () => {
     }
     presentPage.innerHTML +=
       `<section class="trip-cards">
-        <p class="populated-trip-price">
-          The estimated cost of the trip is $${trip.price.toFixed(2)}
-        </p>
-        <p class="populated-trip-status">
-          Your trip status is ${trip.status}
-        </p>
-        <p class="populated-trip-duration">
-          The durtation of your trip is: ${trip.duration}
-        </p>
-        <p class="populated-trip-date">
-          You take off on ${trip.date}
-        </p>
-        <p class="populated-trip-travelers">
-          You have set this for: ${trip.travelers} ${travelerCount}
-        </p>
+        <section class="trip-card-text">
+          <p class="populated-trip-price">
+            The estimated cost of the trip is $${trip.price.toFixed(2)}
+          </p>
+          <p class="populated-trip-status">
+            Your trip status is ${trip.status}
+          </p>
+          <p class="populated-trip-duration">
+            The durtation of your trip is: ${trip.duration}
+          </p>
+          <p class="populated-trip-date">
+            You take off on ${trip.date}
+          </p>
+          <p class="populated-trip-travelers">
+            You have set this for: ${trip.travelers} ${travelerCount}
+          </p>
+        </section>
         <img src= ${currentDestinationImg.image}
           alt= ${currentDestinationImg.destination}
           class="populated-trip-image"

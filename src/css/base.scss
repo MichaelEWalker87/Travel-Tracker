@@ -9,7 +9,8 @@ $header-shadow: hsla(360, 5%, 0%, .6);
 $icon-blue: hsla(195, 95%, 25%, .5);
 $blue-Title: hsla(195, 95%, 25%, 1);
 $pale-blue-background-header: hsla(210, 38%, 86%, .5);
-$text-color:hsla(195, 5%, 15%, 1);
+$text-color-home:hsla(195, 5%, 15%, 1);
+$card-background:hsla(195, 95%, 25%, 0.9);
 
 %input {
   font-size: 1.5rem;
@@ -161,7 +162,7 @@ body {
   background-color: $white-input-background;
   border-radius: 1rem;
   padding: 2rem;
-  color: $text-color;
+  color: $text-color-home;
 }
 
 
@@ -175,7 +176,7 @@ body {
 .home-input {
   padding-right: 1rem;
   font-size: 2rem;
-  color: $text-color;
+  color: $text-color-home;
 }
 
 
@@ -203,10 +204,25 @@ body {
   size: 10rem;
   width: 55%;
   padding: 1rem;
+  border-radius: 3rem;
 }
 
 .trip-cards {
   display: flex;
   flex-direction: row-reverse;
+  background: $card-background;
+  margin: 1rem;
+  border-radius: 1rem;
+  justify-content: space-around;
 }
-@charset "UTF-8";
+
+.trip-card-text {
+  align-self: center;
+  font-family: $main-font;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  color: $white-Icon-Text;
+  background-color: $header-shadow;
+}
