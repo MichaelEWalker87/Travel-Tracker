@@ -13,8 +13,8 @@ class Trips {
     this.price = 0;
     this.agentFee = 0;
     this.endDate = moment(this.date, "YYYY/MM/DD")
-                    .add(this.duration, 'days')
-                    .format("YYYY/MM/DD");
+                   .add(this.duration, 'days')
+                   .format("YYYY/MM/DD");
   }
 
   calculatePrice(destinationData) {

@@ -42,6 +42,7 @@ let api = {
       body: JSON.stringify(newTrip),
     })
       .then (response => response.json())
+      .then (response => console.log(response))
       .catch(err => console.log(err));
     return promise;
   },
