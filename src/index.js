@@ -56,26 +56,24 @@ let travelersDurationPicker = document.querySelector(".travelers-duration-slider
 let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
 
-
-let onLoadContent = () => {
-  let promise1 = api.getTravelers()
-  let promise2 = api.getOneTraveler()
-  let promise3 = api.getAllTrips()
-  let promise4 = api.getAllDestinations()
-  Promise.all([promise1, promise2, promise3, promise4])
-    .then(values => {
-      allTravelers = values[0];
-      oneTraveler = values[1];
-      allTrips = values[2];
-      allDestinations = values[3];
-      generateTraveler();
-      generateDestination();
-      generateTrips();
+let retrieveData = (event) => {
+  api.getAllServerData()
+  .then(values => {
+    allTravelers = values[0];
+    oneTraveler = values[1];
+    allTrips = values[2];
+    allDestinations = values[3];
+    generateTraveler();
+    generateDestination();
+    generateTrips();
+    if (event.type === 'load') {
       populateHomeGreating();
-      generateDestinationPicker();
-      populateAllTitles();
-      populateAllPages();
-    })
+    }
+    generateDestinationPicker();
+    populateAllTitles();
+    populateAllPages();
+  })
+  .catch(err => console.log(err));
 }
 
 
@@ -138,7 +136,6 @@ let generateDestinationPicker = () => {
 let populateAllPages = () => {
   let allCardPages = ["present", "upcoming", "past", "pending"];
   let currentDestinationImg;
-  console.log(currentTraveler.name.split(" ")[0])
   currentTraveler.getUserTripData(tripsData);
   currentTraveler.loadTravelerPresent(tripsData);
   currentTraveler.loadTravelerPast(tripsData);
@@ -225,9 +222,8 @@ let captureSubmitedData = () => {
 let submitRequest = () => {
   let newTrip = captureSubmitedData();
   api.addTrip(newTrip)
-    .then(response => response);
-     allTrips = api.getAllTrips();
-     generateTrips();
+    .then(response => response)
+    .then(() => retrieveData())
 }
 
 let selectPresentTripsIcon = () => {
@@ -286,7 +282,7 @@ let selectNavIcon = () => {
   }
 }
 
-window.addEventListener('load', onLoadContent);
+window.addEventListener('load', retrieveData);
 allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
 submitTrip.addEventListener('click', submitRequest);
