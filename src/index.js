@@ -72,6 +72,7 @@ let onLoadContent = () => {
       generateDestination();
       generateTrips();
       populateHomeGreating();
+      generateDestinationPicker();
       populateAllTitles();
       populateAllPages();
     })
@@ -101,8 +102,7 @@ let generateTrips = () => {
 }
 
 let populateHomeGreating = () =>{
-    let targetDomObject = document.querySelector(".home")
-    targetDomObject.insertAdjacentHTML("afterbegin",
+    homePage.insertAdjacentHTML("afterbegin",
       `<section class="page-header welcome-header">
         <h2 class="page-title-text">
           Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
@@ -123,6 +123,15 @@ let populateAllTitles = () =>{
         </h2>
        </section>`
   })
+}
+
+let generateDestinationPicker = () => {
+  allDestinations.forEach((destinations, i) => {
+    if(destinations.destination !== "Rome, Italy")
+    destinationPicker.insertAdjacentHTML("afterbegin",
+      `<option value=${destinations.id}>${destinations.destination}</option>`
+    )
+  });
 }
 
 
