@@ -109,8 +109,7 @@ let populateAllPages = () => {
   currentTraveler.loadTravelerUpcoming(tripsData);
   allCardPages.forEach((page) => {
     let targetDomObject = document.querySelector(`.${page}`)
-    console.log(targetDomObject)
-    if(currentTraveler[page] !== []) {
+    if(currentTraveler[page].length >= 1) {
       currentTraveler[page].forEach((trip) => {
         currentDestinationImg = allDestinations.find((destination) => {
           return trip.destinationID === destination.id
@@ -161,8 +160,9 @@ let populateAllPages = () => {
       targetDomObject.innerHTML +=
         `<section class="no-cards">
           <p class="no-populated">
-            You Have No: ${page} trips
-            Book Now!
+            OH NOOO!!! <br> YOU HAVE NO ${page.toUpperCase()} TRIPS
+            <br> DON’T WORRY BE HOPPY AND
+            BOOK NOW!
           </p>
         </section>
         `

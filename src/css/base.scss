@@ -226,3 +226,10 @@ body {
   color: $white-Icon-Text;
   background-color: $header-shadow;
 }
+.no-populated {
+  background: $card-background;
+  text-align: center;
+  margin: 10rem;
+  padding: 3rem;
+  @extend .trip-card-text
+}
