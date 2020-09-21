@@ -3,7 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-import Destinations from './trips';
+import Destinations from './destinations';
 import Travelers from './travelers';
 import Trips from './trips';
 import api from './api';
@@ -74,12 +74,14 @@ let onLoadContent = () => {
       generateTraveler();
       generateDestination();
       generateTrips();
+      populatePresentPage();
+      console.log(allDestinations)
     })
 }
 
 
 let generateTraveler = () =>{
-  let currentTraveler = new Travelers(oneTraveler)
+  currentTraveler = new Travelers(oneTraveler)
 }
 
 let generateDestination = () =>{
@@ -100,35 +102,78 @@ let generateTrips = () => {
   tripsData = allTripStats;
 }
 
-let getData = () => {
-
+let populatePresentPage = () => {
+  currentTraveler.loadTravelerPresent(tripsData);
+  currentTraveler.present.forEach((trip) => {
+    let currentDestinationImg = allDestinations.find((destination) => {
+      return trip.destinationID === destination.id
+    })
+    // console.log(currentDestinationImg)
+    let durationCount
+    let travelerCount
+    if (trip.duration >= 2){
+      durationCount = "days of travling fun!"
+    } else {
+      durationCount = "day quick get away!"
+    }
+    if (trip.travelers >= 2){
+      travelerCount = "in your party of travelers!"
+    } else {
+      travelerCount = "awesome solo traveler!"
+    }
+    presentPage.innerHTML =
+      `<p class="populated-trip-price">
+        The cost of the trip is $${trip.price.toFixed(2)}
+      </p>
+      <p class="populated-trip-status">
+        Your trip status is ${trip.status}
+      </p>
+      <p class="populated-trip-duration">
+        The durtation of your trip is: ${trip.duration}
+      </p>
+      <p class="populated-trip-date">
+        You take off on ${trip.date}
+      </p>
+      <p class="populated-trip-travelers">
+        You have set this for: ${trip.travelers} ${travelerCount}
+      </p>
+      <img src= ${currentDestinationImg.image}
+        alt= ${durationCount.destination}
+        class="populated-trip-image"
+      >
+      `
+  });
 }
-
-
-let setDestinationPicker = () => {
-
-}
-
+// let getData = () => {
+//
+// }
+//
+//
+// let setDestinationPicker = () => {
+//
+// }
+//make wrpper funtion
 let captureSubmitedData = () => {
   let calenderDate = calenderPicker.value.split("-")
   let formatedDate = calenderDate.join("/")
-return {
-          id: Date.now(),
-          userID: 2,
-          destinationID: parseInt(destinationPicker.value),
-          travelers: parseInt(travelersNumberPicker.value),
-          date: formatedDate,
-          duration: parseInt(travelersDurationPicker.value),
-          status: 'pending',
-          suggestedActivities: []
-        }
+  return {
+    id: Date.now(),
+    userID: 2,
+    destinationID: parseInt(destinationPicker.value),
+    travelers: parseInt(travelersNumberPicker.value),
+    date: formatedDate,
+    duration: parseInt(travelersDurationPicker.value),
+    status: 'pending',
+    suggestedActivities: []
+  }
 }
 
 let submitRequest = () => {
   let newTrip = captureSubmitedData();
-  console.log(newTrip)
   api.addTrip(newTrip)
-    .then(response => console.log(response));
+    .then(response => response);
+     allTrips = api.getAllTrips();
+     generateTrips();
   //I want to capture the value of the input for the form feilds in the home page
   // calender
   //days
@@ -140,18 +185,57 @@ let submitRequest = () => {
   //redisplay
 }
 
+let selectPresentTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.remove("hidden");
+}
+
+let selectFutureTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.remove("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectPastTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.remove("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectPendingTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.remove("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectHomePageIcon = () => {
+  homePage.classList.remove("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
 
 let selectNavIcon = () => {
   if(event.target.classList.contains('present-trips')) {
-    console.log("present-trips")
+    selectPresentTripsIcon();
   } else if (event.target.classList.contains('home-page')) {
-    console.log("home-page")
+    selectHomePageIcon();
   } else if (event.target.classList.contains('future-trips')) {
-    console.log("future-trips")
+    selectFutureTripsIcon();
   } else if (event.target.classList.contains('pending-trips')) {
-    console.log("pending-trips")
+    selectPendingTripsIcon();
   } else if (event.target.classList.contains('past-trips')) {
-    console.log("past-trips")
+    selectPastTripsIcon();
   } else if (event.target.classList.contains('moblie-icon')) {
     console.log("moblie-icon")
   }
@@ -160,4 +244,4 @@ let selectNavIcon = () => {
 window.addEventListener('load', onLoadContent);
 allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
-// submitTrip.addEventListener('click', submitRequest);
+submitTrip.addEventListener('click', submitRequest);
