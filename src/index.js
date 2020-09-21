@@ -44,10 +44,10 @@ let loginButton = document.querySelector(".login-button");//not being used yet
 let loginMobileBackground = document.querySelector(".whole-filter-section");//not being used yet
 let loginSection = document.querySelector(".main-login");//not being used yet
 let homePage = document.querySelector(".home");//not being used yet
-let presentPage = document.querySelector(".present");//not being used yet
-let futurePage = document.querySelector(".future");//not being used yet
-let pastPage = document.querySelector(".past");//not being used yet
-let pendingPage = document.querySelector(".pending");//not being used yet
+let present = document.querySelector(".present");//not being used yet
+let upcoming = document.querySelector(".upcoming");//not being used yet
+let past = document.querySelector(".past");//not being used yet
+let pending = document.querySelector(".pending");//not being used yet
 let allIcons = document.querySelector(".header-section");//not being used yet
 let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");//not being used yet
@@ -72,7 +72,7 @@ let onLoadContent = () => {
       generateTraveler();
       generateDestination();
       generateTrips();
-      populatePresentPage();
+      populateAllPages();
     })
 }
 
@@ -99,51 +99,74 @@ let generateTrips = () => {
   tripsData = allTripStats;
 }
 
-let populatePresentPage = () => {
+let populateAllPages = () => {
+  let allCardPages = ["present", "upcoming", "past", "pending"];
+  let currentDestinationImg;
+  currentTraveler.getUserTripData(tripsData);
   currentTraveler.loadTravelerPresent(tripsData);
-  currentTraveler.present.forEach((trip) => {
-    let currentDestinationImg = allDestinations.find((destination) => {
-      // console.log(destination)
-      return trip.destinationID === destination.id
-    })
-    trip.calculatePrice(allDestinations);
-    let durationCount
-    let travelerCount
-    if (trip.duration >= 2) {
-      durationCount = "days of travling fun!"
+  currentTraveler.loadTravelerPast(tripsData);
+  currentTraveler.loadTravelerPending(tripsData);
+  currentTraveler.loadTravelerUpcoming(tripsData);
+  allCardPages.forEach((page) => {
+    let targetDomObject = document.querySelector(`.${page}`)
+    console.log(targetDomObject)
+    if(currentTraveler[page] !== []) {
+      currentTraveler[page].forEach((trip) => {
+        currentDestinationImg = allDestinations.find((destination) => {
+          return trip.destinationID === destination.id
+        })
+        trip.calculatePrice(allDestinations);
+        let durationCount
+        let travelerCount
+        if (trip.duration >= 2) {
+          durationCount = "days of travling fun!"
+        } else {
+          durationCount = "day quick get away!"
+        }
+        if (trip.travelers >= 2) {
+          travelerCount = "in your party of travelers!"
+        } else {
+          travelerCount = "awesome solo traveler!"
+        }
+        targetDomObject.innerHTML +=
+          `<section class="trip-cards">
+            <section class="trip-card-text">
+              <h2 class="populated-trip-price">
+                ${currentDestinationImg.destination}
+              </h2>
+              <p class="populated-trip-price">
+                The estimated cost of the trip is $${trip.price.toFixed(2)}
+              </p>
+              <p class="populated-trip-status">
+                Your trip status is in ${trip.status} status
+              </p>
+              <p class="populated-trip-duration">
+                The durtation of your trip is: ${trip.duration}
+              </p>
+              <p class="populated-trip-date">
+                You take off on ${trip.date}
+              </p>
+              <p class="populated-trip-travelers">
+                You have set this for: ${trip.travelers} ${travelerCount}
+              </p>
+            </section>
+            <img src= ${currentDestinationImg.image}
+              alt= ${currentDestinationImg.destination}
+              class="populated-trip-image"
+            >
+          </section>
+          `
+      });
     } else {
-      durationCount = "day quick get away!"
-    }
-    if (trip.travelers >= 2) {
-      travelerCount = "in your party of travelers!"
-    } else {
-      travelerCount = "awesome solo traveler!"
-    }
-    presentPage.innerHTML +=
-      `<section class="trip-cards">
-        <section class="trip-card-text">
-          <p class="populated-trip-price">
-            The estimated cost of the trip is $${trip.price.toFixed(2)}
-          </p>
-          <p class="populated-trip-status">
-            Your trip status is ${trip.status}
-          </p>
-          <p class="populated-trip-duration">
-            The durtation of your trip is: ${trip.duration}
-          </p>
-          <p class="populated-trip-date">
-            You take off on ${trip.date}
-          </p>
-          <p class="populated-trip-travelers">
-            You have set this for: ${trip.travelers} ${travelerCount}
+      targetDomObject.innerHTML +=
+        `<section class="no-cards">
+          <p class="no-populated">
+            You Have No: ${page} trips
+            Book Now!
           </p>
         </section>
-        <img src= ${currentDestinationImg.image}
-          alt= ${currentDestinationImg.destination}
-          class="populated-trip-image"
-        >
-      </section>
-      `
+        `
+    }
   });
 }
 
@@ -172,42 +195,42 @@ let submitRequest = () => {
 
 let selectPresentTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.remove("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.remove("hidden");
 }
 
 let selectFutureTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.remove("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.remove("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
 }
 
 let selectPastTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.remove("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  past.classList.remove("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
+  upcoming.classList.add("hidden");
 }
 
 let selectPendingTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.remove("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.remove("hidden");
+  present.classList.add("hidden");
 }
 
 let selectHomePageIcon = () => {
   homePage.classList.remove("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
 }
 
 let selectNavIcon = () => {
