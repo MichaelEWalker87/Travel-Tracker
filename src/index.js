@@ -29,9 +29,7 @@ import './images/home.png'
 import './images/future.png'
 import './images/burger.png'
 
-
 // console.log('This is the JavaScript entry file - your code begins here.');
-
 
 let allTravelers;
 let oneTraveler;
@@ -122,25 +120,27 @@ let populatePresentPage = () => {
       travelerCount = "awesome solo traveler!"
     }
     presentPage.innerHTML +=
-      `<p class="populated-trip-price">
-        The estimated cost of the trip is $${trip.price.toFixed(2)}
-      </p>
-      <p class="populated-trip-status">
-        Your trip status is ${trip.status}
-      </p>
-      <p class="populated-trip-duration">
-        The durtation of your trip is: ${trip.duration}
-      </p>
-      <p class="populated-trip-date">
-        You take off on ${trip.date}
-      </p>
-      <p class="populated-trip-travelers">
-        You have set this for: ${trip.travelers} ${travelerCount}
-      </p>
-      <img src= ${currentDestinationImg.image}
-        alt= ${durationCount.destination}
-        class="populated-trip-image"
-      >
+      `<section class="trip-cards">
+        <p class="populated-trip-price">
+          The estimated cost of the trip is $${trip.price.toFixed(2)}
+        </p>
+        <p class="populated-trip-status">
+          Your trip status is ${trip.status}
+        </p>
+        <p class="populated-trip-duration">
+          The durtation of your trip is: ${trip.duration}
+        </p>
+        <p class="populated-trip-date">
+          You take off on ${trip.date}
+        </p>
+        <p class="populated-trip-travelers">
+          You have set this for: ${trip.travelers} ${travelerCount}
+        </p>
+        <img src= ${currentDestinationImg.image}
+          alt= ${currentDestinationImg.destination}
+          class="populated-trip-image"
+        >
+      </section>
       `
   });
 }

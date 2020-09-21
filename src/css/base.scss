@@ -104,6 +104,8 @@ body {
 }
 }
 
+// main-login
+
 .main-login {
   position: relative;
   display: flex;
@@ -132,12 +134,12 @@ body {
 .password {
   @extend %input;
 }
-.login-button{
+.login-button {
   @extend %input;
   border-radius: 1rem;
 }
 
-.whole-filter-section{
+.whole-filter-section {
   background-color: $header-shadow;
   opacity: 100%;
   overflow: auto;
@@ -148,6 +150,8 @@ body {
   position: fixed;
   z-index: 1;
 }
+
+// home
 
 .home {
   text-align: center;
@@ -185,10 +189,24 @@ body {
   cursor: pointer;
 }
 
-.submit-trip{
+.submit-trip {
   cursor: pointer;
   background-color: $blue-Title;
   color: $white-Icon-Text;
   padding: 0.5rem;
   border-radius: 1rem;
 }
+
+// cards
+
+.populated-trip-image {
+  size: 10rem;
+  width: 55%;
+  padding: 1rem;
+}
+
+.trip-cards {
+  display: flex;
+  flex-direction: row-reverse;
+}
+@charset "UTF-8";
