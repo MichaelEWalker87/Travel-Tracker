@@ -72,6 +72,7 @@ let onLoadContent = () => {
       generateTraveler();
       generateDestination();
       generateTrips();
+      populateAllTitles();
       populateAllPages();
     })
 }
@@ -99,9 +100,25 @@ let generateTrips = () => {
   tripsData = allTripStats;
 }
 
+let populateAllTitles = () =>{
+  let allCardPages = ["present", "upcoming", "past", "pending"];
+  allCardPages.forEach((page) => {
+    let targetDomObject = document.querySelector(`.${page}`)
+    targetDomObject.innerHTML +=
+      `<section class="page-header">
+        <h2 class="page-title-text">
+          Beer Traveler ${currentTraveler.name.split(" ")[0]}
+          This is Your ${page.charAt(0).toUpperCase() + page.slice(1)} Trips
+        </h2>
+       </section>`
+  })
+}
+
+
 let populateAllPages = () => {
   let allCardPages = ["present", "upcoming", "past", "pending"];
   let currentDestinationImg;
+  console.log(currentTraveler.name.split(" ")[0])
   currentTraveler.getUserTripData(tripsData);
   currentTraveler.loadTravelerPresent(tripsData);
   currentTraveler.loadTravelerPast(tripsData);
@@ -130,9 +147,9 @@ let populateAllPages = () => {
         targetDomObject.innerHTML +=
           `<section class="trip-cards">
             <section class="trip-card-text">
-              <h2 class="populated-trip-price">
+              <h3 class="populated-trip-price">
                 ${currentDestinationImg.destination}
-              </h2>
+              </h3>
               <p class="populated-trip-price">
                 The estimated cost of the trip is $${trip.price.toFixed(2)}
               </p>
@@ -153,18 +170,18 @@ let populateAllPages = () => {
               alt= ${currentDestinationImg.destination}
               class="populated-trip-image"
             >
-          </section>
+           </section>
           `
       });
     } else {
       targetDomObject.innerHTML +=
         `<section class="no-cards">
-          <p class="no-populated">
-            OH NOOO!!! <br> YOU HAVE NO ${page.toUpperCase()} TRIPS
-            <br> DON’T WORRY BE HOPPY AND
-            BOOK NOW!
-          </p>
-        </section>
+            <p class="no-populated">
+              OH NOOO!!! <br> YOU HAVE NO ${page.toUpperCase()} TRIPS
+              <br> DON’T WORRY BE HOPPY AND
+              BOOK NOW!
+            </p>
+          </section>
         `
     }
   });

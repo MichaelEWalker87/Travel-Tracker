@@ -70,6 +70,8 @@ body {
   color: $blue-Title;
   background-color: $pale-blue-background-header;
   margin-right: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .icon-section {
@@ -202,7 +204,8 @@ body {
 
 .populated-trip-image {
   size: 10rem;
-  width: 55%;
+  width: 29rem;
+  height: 27rem;
   padding: 1rem;
   border-radius: 3rem;
 }
@@ -216,6 +219,12 @@ body {
   justify-content: space-around;
 }
 
+.page-title-text{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  @extend .no-populated
+}
+
 .trip-card-text {
   align-self: center;
   font-family: $main-font;
@@ -226,10 +235,10 @@ body {
   color: $white-Icon-Text;
   background-color: $header-shadow;
 }
+
 .no-populated {
   background: $card-background;
   text-align: center;
-  margin: 10rem;
   padding: 3rem;
   @extend .trip-card-text
 }
