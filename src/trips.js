@@ -18,9 +18,14 @@ class Trips {
   }
 
   calculatePrice(destinationData) {
-    let selectedDestination = destinationData.find((destination, i) => {
-      return  this.destinationID === destination.id
-    })
+    let selectedDestination = destinationData;
+    if(Array.isArray(destinationData)){
+      selectedDestination = destinationData.find((destination, i) => {
+        return  this.destinationID === destination.id
+      })
+    } else {
+      selectedDestination = destinationData
+    }
     let cost = (
       (this.duration * selectedDestination.estimatedLodgingCostPerDay * this.travelers)
       +

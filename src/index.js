@@ -105,9 +105,10 @@ let populatePresentPage = () => {
   currentTraveler.loadTravelerPresent(tripsData);
   currentTraveler.present.forEach((trip) => {
     let currentDestinationImg = allDestinations.find((destination) => {
+      // console.log(destination)
       return trip.destinationID === destination.id
     })
-    console.log(allDestinations);
+    trip.calculatePrice(allDestinations);
     let durationCount
     let travelerCount
     if (trip.duration >= 2) {
@@ -122,7 +123,7 @@ let populatePresentPage = () => {
     }
     presentPage.innerHTML +=
       `<p class="populated-trip-price">
-        The cost of the trip is $${trip.price.toFixed(2)}
+        The estimated cost of the trip is $${trip.price.toFixed(2)}
       </p>
       <p class="populated-trip-status">
         Your trip status is ${trip.status}
