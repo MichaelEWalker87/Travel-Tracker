@@ -57,7 +57,6 @@ let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
 
 
-
 let onLoadContent = () => {
   let promise1 = api.getTravelers()
   let promise2 = api.getOneTraveler()
@@ -72,6 +71,7 @@ let onLoadContent = () => {
       generateTraveler();
       generateDestination();
       generateTrips();
+      populateHomeGreating();
       populateAllTitles();
       populateAllPages();
     })
@@ -98,6 +98,17 @@ let generateTrips = () => {
     return tripsData
   }, []);
   tripsData = allTripStats;
+}
+
+let populateHomeGreating = () =>{
+    let targetDomObject = document.querySelector(".home")
+    targetDomObject.insertAdjacentHTML("afterbegin",
+      `<section class="page-header welcome-header">
+        <h2 class="page-title-text">
+          Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
+        </h2>
+       </section>`
+    )
 }
 
 let populateAllTitles = () =>{
