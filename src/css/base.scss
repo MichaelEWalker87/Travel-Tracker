@@ -200,6 +200,10 @@ body {
   border-radius: 1rem;
 }
 
+.submit-estimate {
+  font-size: 1.28rem;
+  @extend .submit-trip;
+}
 // cards
 
 .populated-trip-image {
