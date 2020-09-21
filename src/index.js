@@ -75,7 +75,6 @@ let onLoadContent = () => {
       generateDestination();
       generateTrips();
       populatePresentPage();
-      console.log(allDestinations)
     })
 }
 
@@ -108,20 +107,20 @@ let populatePresentPage = () => {
     let currentDestinationImg = allDestinations.find((destination) => {
       return trip.destinationID === destination.id
     })
-    // console.log(currentDestinationImg)
+    console.log(allDestinations);
     let durationCount
     let travelerCount
-    if (trip.duration >= 2){
+    if (trip.duration >= 2) {
       durationCount = "days of travling fun!"
     } else {
       durationCount = "day quick get away!"
     }
-    if (trip.travelers >= 2){
+    if (trip.travelers >= 2) {
       travelerCount = "in your party of travelers!"
     } else {
       travelerCount = "awesome solo traveler!"
     }
-    presentPage.innerHTML =
+    presentPage.innerHTML +=
       `<p class="populated-trip-price">
         The cost of the trip is $${trip.price.toFixed(2)}
       </p>
@@ -144,15 +143,7 @@ let populatePresentPage = () => {
       `
   });
 }
-// let getData = () => {
-//
-// }
-//
-//
-// let setDestinationPicker = () => {
-//
-// }
-//make wrpper funtion
+
 let captureSubmitedData = () => {
   let calenderDate = calenderPicker.value.split("-")
   let formatedDate = calenderDate.join("/")
@@ -174,15 +165,6 @@ let submitRequest = () => {
     .then(response => response);
      allTrips = api.getAllTrips();
      generateTrips();
-  //I want to capture the value of the input for the form feilds in the home page
-  // calender
-  //days
-  //travelers
-  //destination
-  //Post it
-  //get data
-  //update the current instations of trip
-  //redisplay
 }
 
 let selectPresentTripsIcon = () => {

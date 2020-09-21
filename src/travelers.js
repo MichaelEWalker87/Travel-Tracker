@@ -78,7 +78,6 @@ class Travelers {
     this.travelersTotal = yearlyTotal;
   };
 
-
   userNameUpdate() {
 
   };
