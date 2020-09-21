@@ -72,6 +72,7 @@ let retrieveData = (event) => {
     generateDestinationPicker();
     populateAllTitles();
     populateAllPages();
+    displaySumbittedData();
   })
   .catch(err => console.log(err));
 }
@@ -217,6 +218,22 @@ let captureSubmitedData = () => {
     status: 'pending',
     suggestedActivities: []
   }
+}
+
+let displaySumbittedData = () => {
+  let selectedDestination = allDestinations.find((destination) => {
+    return parseInt(destinationPicker.value) === destination.id
+  })
+  let currentTrip = new Trips(captureSubmitedData())
+  currentTrip.calculatePrice(allDestinations)
+  console.log(currentTrip.price.toFixed(2))
+  homePage.insertAdjacentHTML("beforeend",
+    `<p class="submited-trip-price">
+      Your Adventure to ${selectedDestination.destination} is estimated cost is
+        $${currentTrip.price.toFixed(2)} Clink Submit to request!
+    </p>
+    `
+  )
 }
 
 let submitRequest = () => {
