@@ -2,7 +2,9 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import Trips from '../src/trips';
+import Destinations from '../src/trips';
 import tripsData from '../src/data/trips-data';
+import destinationData from '../src/data/destinations-data';
 
 describe('Trips', () => {
   let trip, trip2, trip3;
@@ -58,14 +60,29 @@ describe('Trips', () => {
       expect(trip.endDate).to.be.equal("2020/10/04");
     });
 
+    it("should start with the price of trip being zero", () => {
+      expect(trip.price).to.be.equal(0);
+    });
+
+    it("should start with the price of trip being zero", () => {
+      expect(trip.agentFee).to.be.equal(0);
+    });
+
+    it("should start with the price of trip being zero", () => {
+      expect(trip.destinationID).to.be.equal(49);
+    });
   });
 
   describe('Methods of Trips', () => {
 
-    // it("should be able to store the trip duration", () => {
-    //   trip.getUserTripData(tripsData)
-    //   expect(trip.suggestedActivities).to.be.equal(0);
-    // });
+    it("should be able to calculate the price for a trip", () => {
+      trip.calculatePrice(destinationData)
+      expect(trip.price).to.be.equal(12969);
+    });
 
+    it("should be able to calculate the agentFee for a trip", () => {
+      trip.calculatePrice(destinationData)
+      expect(trip.agentFee).to.be.equal(1179);
+    }); 
   });
 });

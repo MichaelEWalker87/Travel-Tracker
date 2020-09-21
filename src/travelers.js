@@ -27,8 +27,8 @@ class Travelers {
     const start = Date.now();
     let now = new Date(start)
     this.userTotalTrips.forEach((trip) => {
-      let tripDate = new Date(trip.date)
-      if(tripDate < now) {
+      let tripDate = new Date(trip.endDate)
+      if(tripDate < now && trip.status !== "pending") {
         this.past.push(trip)
       }
     });
@@ -64,6 +64,20 @@ class Travelers {
       }
     });
   };
+
+  calculateTravelersTotalPrice(destinationData) {
+    const thisYear = new Date(Date.now());
+    let yearlyTotal = this.userTotalTrips.reduce((total, trip) => {
+       trip.calculatePrice(destinationData);
+       let tripYear = new Date(trip.date)
+       if(thisYear.getFullYear() === tripYear.getFullYear()){
+          total += trip.price;
+       }
+       return total
+    }, 0);
+    this.travelersTotal = yearlyTotal;
+  };
+
 
   userNameUpdate() {
 
