@@ -104,7 +104,7 @@ let verifyLogin = () => {
   if (password.value === "travel2020" && userString[0] === "" && userNumber <= 50 && userNumber >= 1) {
     console.log(userNumber)
     removeDisplayLogin();
-    retrieveData();
+    retrieveData(userNumber);
     return userNumber
   } else {
     alert("You have entered the wrong password or username please try again")
