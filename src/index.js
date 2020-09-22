@@ -33,10 +33,9 @@ import './images/burger.png'
 
 let allTravelers;
 let oneTraveler;
-let allTrips;
 let allDestinations;
 let currentTraveler;
-let tripsData;
+let tripsData = [];
 let userNumber = 2;
 
 let username = document.querySelector(".username");//not being used yet
@@ -64,27 +63,20 @@ let retrieveData = (event) => {
   .then(values => {
     allTravelers = values[0];
     oneTraveler = values[1];
-    allTrips = values[2];
+    values[2].trips.forEach((trip) => {
+      let usersTrips = new Trips(trip);
+      tripsData.push(usersTrips)
+    });
     allDestinations = values[3];
     generateTraveler();
     generateDestination();
-    generateTrips();
-    // if(!event){
-    //
-    // } else if (event.type === 'load') { //change this from load to click event
-    //   console.log(event.type)
-    // }
     populateHomeGreating();
     generateDestinationPicker();
-    populateAllTitles();
     populateAllPages();
     populateYearlyCost();
   })
   .catch(err => console.log(err));
 }
-
-
-
 
 let addDisplayLogin = () => {
   loginMobileBackground.classList.remove("hidden");
@@ -102,7 +94,6 @@ let verifyLogin = () => {
   const userString = username.value.split('traveler');
   userNumber = parseInt(userString[1])
   if (password.value === "travel2020" && userString[0] === "" && userNumber <= 50 && userNumber >= 1) {
-    console.log(userNumber)
     removeDisplayLogin();
     retrieveData(userNumber);
     return userNumber
@@ -125,36 +116,20 @@ let generateDestination = () =>{
   allDestinations = finalDestination;
 }
 
-let generateTrips = () => {
-  let allTripStats = allTrips.trips.reduce((tripsData, trip) => {
-    let currentTrip = new Trips(trip)
-    tripsData.push(currentTrip)
-    return tripsData
-  }, []);
-  tripsData = allTripStats;
-}
-
 let populateHomeGreating = () =>{
-    homePage.insertAdjacentHTML("afterbegin",
-      `<section class="welcome-header">
-        <h2 class="page-title-text">
-          Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
-        </h2>
-       </section>`
-    )
+  let pageTitleText = document.querySelector(".page-title-text");
+  pageTitleText.innerText =
+    `Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
+    `
 }
 
 let populateYearlyCost = () =>{
+  let yearlyCostText = document.querySelector(".yearly-cost-text");
   currentTraveler.calculateTravelersTotalPrice(allDestinations)
-    homePage.insertAdjacentHTML("beforeend",
-      `<section class="yearly-cost">
-        <h3 class="page-title-text">
-          Your estimated annu-Ale travling cost is <br>
-          $${currentTraveler.travelersTotal.toFixed(2)}
-        </h3>
-       </section>
-      `
-    )
+  yearlyCostText.innerHTML =
+    `Your estimated annu-Ale travling cost is <br>
+      $${currentTraveler.travelersTotal.toFixed(2)}
+    `
 }
 
 let populateAllTitles = () =>{
@@ -189,6 +164,11 @@ let populateAllPages = () => {
   currentTraveler.loadTravelerPast(tripsData);
   currentTraveler.loadTravelerPending(tripsData);
   currentTraveler.loadTravelerUpcoming(tripsData);
+  allCardPages.forEach((page, i) => {
+    let targetDomObject = document.querySelector(`.${page}`)
+      targetDomObject.innerHTML = ""
+  });
+  populateAllTitles();
   allCardPages.forEach((page) => {
     let targetDomObject = document.querySelector(`.${page}`)
     if(currentTraveler[page].length >= 1) {
@@ -209,7 +189,7 @@ let populateAllPages = () => {
         } else {
           travelerCount = "awesome solo traveler!"
         }
-        targetDomObject.innerHTML +=
+        targetDomObject.insertAdjacentHTML('beforeend',
           `<section class="trip-cards">
             <section class="trip-card-text">
               <h3 class="populated-trip-price">
@@ -237,9 +217,10 @@ let populateAllPages = () => {
             >
            </section>
           `
+        )
       });
     } else {
-      targetDomObject.innerHTML +=
+      targetDomObject.insertAdjacentHTML('beforeend',
         `<section class="no-cards">
             <p class="no-populated">
               OH NOOO!!! <br> YOU HAVE NO ${page.toUpperCase()} TRIPS
@@ -248,6 +229,7 @@ let populateAllPages = () => {
             </p>
           </section>
         `
+      )
     }
   });
 }
@@ -257,7 +239,7 @@ let captureSubmitedData = () => {
   let formatedDate = calenderDate.join("/")
   return {
     id: Date.now(),
-    userID: 2,
+    userID: currentTraveler.id,
     destinationID: parseInt(destinationPicker.value),
     travelers: parseInt(travelersNumberPicker.value),
     date: formatedDate,
@@ -267,7 +249,17 @@ let captureSubmitedData = () => {
   }
 }
 
+let clearSubmittedData = () => {
+  tripsData = [];
+  currentTraveler.userTotalTrips = [];
+  currentTraveler.past = [];
+  currentTraveler.present = [];
+  currentTraveler.upcoming = [];
+  currentTraveler.pending = [];
+}
+
 let displaySumbittedEstimate = () => {
+  let submitedTripPrice = document.querySelector(".submited-trip-price");
   submitEstimate.classList.add("hidden");
   submitTrip.classList.remove("hidden");
   let selectedDestination = allDestinations.find((destination) => {
@@ -275,46 +267,36 @@ let displaySumbittedEstimate = () => {
   })
   let currentTrip = new Trips(captureSubmitedData())
   currentTrip.calculatePrice(allDestinations)
-  homePage.insertAdjacentHTML("beforeend",
-    `<p class="submited-trip-price">
-      Your Adventure to ${selectedDestination.destination} is estimated cost is
+  submitedTripPrice.innerText =
+    `  Your Adventure to ${selectedDestination.destination} is estimated cost is
         $${currentTrip.price.toFixed(2)} Clink Submit to request!
-    </p>
     `
-  )
 }
 
 let successfullSubmitMessage = (response) => {
   let submitedTripPrice = document.querySelector(".submited-trip-price");
-  submitedTripPrice.remove()
   if(response.message.includes("successfully")) {
-    homePage.insertAdjacentHTML("beforeend",
-      `<p class="submited-trip-price">
+      submitedTripPrice.innerText =
+        `
         Your Adventure has been submited, checkout your pending trips for details
-      </p>
-      `
-    )
+        `
   } else {
-    homePage.insertAdjacentHTML("beforeend",
-      `<p class="submited-trip-price">
-        Opps something went wrong please call us at 555-867-53O9 and ask for Jenny
-      </p>
+    submitedTripPrice.innerText =
       `
-    )
+        Opps something went wrong please call us at 555-867-53O9 and ask for Jenny
+      `
   };
   submitEstimate.disabled = true;
 }
 
 let submitRequest = () => {
-  let welcomeHeader = document.querySelector(".welcome-header");
-  let yearlyCost = document.querySelector(".yearly-cost");
+
   submitEstimate.classList.add("hidden");
   submitTrip.classList.add("hidden");
   let newTrip = captureSubmitedData();
   api.addTrip(newTrip)
     .then(response => successfullSubmitMessage(response))
-    .then(() => welcomeHeader.remove())
-    .then(() => yearlyCost.remove())
+    .then(() => clearSubmittedData())
     .then(() => retrieveData())
 }
 
@@ -383,7 +365,7 @@ let selectNavIcon = () => {
   } else if (event.target.classList.contains('past-trips')) {
     selectPastTripsIcon();
   } else if (event.target.classList.contains('moblie-icon')) {
-    console.log("moblie-icon")
+    // console.log("moblie-icon")
   }
 }
 
