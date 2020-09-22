@@ -34,7 +34,7 @@ body {
 }
 
 .moblie {
-  display: none !important;
+  display: none;
 }
 
 .logo {
@@ -44,7 +44,7 @@ body {
 }
 
 .logo-login{
-  width: 60%;
+  width: 44rem;
 }
 
 .logo-section {
@@ -226,7 +226,6 @@ body {
   @extend .submit-trip;
 }
 
-
 // cards
 
 .populated-trip-image {
@@ -274,5 +273,23 @@ body {
   background: $card-background;
   text-align: center;
   padding: 3rem;
-  @extend .trip-card-text
+  @extend .trip-card-text;
+}
+
+//mobile
+
+@media(min-width: 760px){
+
+.desktop-nav {
+  display: none !important;
+}
+
+.moblie {
+  display: flex;
+  
+}
+
+.nav-btn {
+
+  }
 }
