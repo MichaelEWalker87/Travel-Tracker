@@ -69,8 +69,9 @@ let retrieveData = (event) => {
     generateDestination();
     generateTrips();
     if(!event){
-
+      addDisplayLogin();
     } else if (event.type === 'load') { //change this from load to click event
+      addDisplayLogin();
       populateHomeGreating();
     }
     generateDestinationPicker();
@@ -82,7 +83,19 @@ let retrieveData = (event) => {
 }
 
 
-let generateTraveler = () =>{
+
+
+let addDisplayLogin = () => {
+  loginMobileBackground.classList.remove("hidden");
+  loginSection.classList.remove("hidden");
+}
+
+let removeDisplayLogin = () => {
+  loginMobileBackground.classList.add("hidden");
+  loginSection.classList.add("hidden");
+}
+
+let generateTraveler = () => {
   currentTraveler = new Travelers(oneTraveler)
 }
 
@@ -119,7 +132,7 @@ let populateYearlyCost = () =>{
     homePage.insertAdjacentHTML("beforeend",
       `<section class="yearly-cost">
         <h3 class="page-title-text">
-          Your estimated annual travling cost is <br>
+          Your estimated annu-ale travling cost is <br>
           $${currentTraveler.travelersTotal.toFixed(2)}
         </h3>
        </section>
