@@ -285,6 +285,7 @@ let submitRequest = () => {
 }
 
 let selectPresentTripsIcon = () => {
+  document.body.style.backgroundImage = "url('./images/Seattle.jpg')";
   homePage.classList.add("hidden");
   upcoming.classList.add("hidden");
   past.classList.add("hidden");
@@ -293,6 +294,7 @@ let selectPresentTripsIcon = () => {
 }
 
 let selectFutureTripsIcon = () => {
+  document.body.style.backgroundImage = "url('./images/Outdoor.jpg')";
   homePage.classList.add("hidden");
   upcoming.classList.remove("hidden");
   past.classList.add("hidden");
@@ -301,6 +303,7 @@ let selectFutureTripsIcon = () => {
 }
 
 let selectPastTripsIcon = () => {
+  document.body.style.backgroundImage = "url('./images/Desert.jpg')";
   homePage.classList.add("hidden");
   past.classList.remove("hidden");
   pending.classList.add("hidden");
@@ -309,6 +312,7 @@ let selectPastTripsIcon = () => {
 }
 
 let selectPendingTripsIcon = () => {
+  document.body.style.backgroundImage = "url('./images/new-york-city.jpg')";
   homePage.classList.add("hidden");
   upcoming.classList.add("hidden");
   past.classList.add("hidden");
@@ -317,6 +321,7 @@ let selectPendingTripsIcon = () => {
 }
 
 let selectHomePageIcon = () => {
+  document.body.style.backgroundImage = "url('./images/honghong.jpg')";
   homePage.classList.remove("hidden");
   upcoming.classList.add("hidden");
   past.classList.add("hidden");
