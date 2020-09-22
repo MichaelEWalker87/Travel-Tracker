@@ -18,15 +18,19 @@ class Trips {
   }
 
   calculatePrice(destinationData) {
-    let selectedDestination = destinationData.find((destination, i) => {
-      return  this.destinationID === destination.id
-    })
+    let selectedDestination = destinationData;
+    if(Array.isArray(destinationData)){
+      selectedDestination = destinationData.find((destination, i) => {
+        return  this.destinationID === destination.id
+      })
+    } else {
+      selectedDestination = destinationData
+    }
     let cost = (
       (this.duration * selectedDestination.estimatedLodgingCostPerDay * this.travelers)
       +
       (this.travelers * selectedDestination.estimatedFlightCostPerPerson)
     )
-    // console.log("what's going on I said heeeey", cost)
     let agentFeeNumber = (cost * 0.10);
     this.agentFee = (Math.round(((cost * 0.10)* 100)) / 100);
     let totalPrice = (Math.round(((cost + agentFeeNumber) * 100)) / 100)

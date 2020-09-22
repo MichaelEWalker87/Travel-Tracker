@@ -23,7 +23,7 @@ class Travelers {
     });
   };
 
-  loadTravelerPast() {
+  loadTravelerPast(trips) {
     const start = Date.now();
     let now = new Date(start)
     this.userTotalTrips.forEach((trip) => {
@@ -34,7 +34,7 @@ class Travelers {
     });
   };
 
-  loadTravelerPending() {
+  loadTravelerPending(trips) {
     this.userTotalTrips.forEach((trip) => {
       if(trip.status === "pending") {
         this.pending.push(trip)
@@ -54,7 +54,7 @@ class Travelers {
     });
   };
 
-  loadTravelerUpcoming() {
+  loadTravelerUpcoming(trips) {
     const start = Date.now();
     let now = new Date(start)
     this.userTotalTrips.forEach((trip) => {

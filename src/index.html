@@ -96,9 +96,6 @@
       <label for="Destination" class="home-input">Choose A Destination:</label>
       <select id="destination-dropdown" class="destination-picker home-input-form">
         <option value=22 selected>Rome, Italy</option>
-        <option value=25>Brussels, Belgium</option>
-        <option value=49>Castries, St Lucia</option>
-        <option value=14>Marrakesh, Morocco</option>
       </select>
       <br>
         <label for="travelers-number-dropdown" class="home-input">
@@ -134,7 +131,8 @@
             type="number" id="quantity"
             class="travelers-duration-picker travelers-duration-slider home-input-form"
             name="quantity" min="1" max="60"
-          >
+            <option value=7 selected>
+          </option>
         </form>
       </section>
       <section class="calender-picker home-input-form">
@@ -147,13 +145,16 @@
           min="2018-01-01" max="2030-12-31" class="home-input-form"
         >
       </section>
+      <button type="button" class="submit-estimate"
+        name="Submit">Get Estimate
+      </button>
       <button type="button" class="submit-trip home-input-form"
         name="Submit">Submit Request
       </button>
     </section>
     <section class="present hidden">
     </section>
-    <section class="future hidden">
+    <section class="upcoming hidden">
     </section>
     <section class="past hidden">
     </section>
@@ -161,4 +162,3 @@
     </section>
   </body>
 </html>
-<img src="" alt="">

@@ -29,9 +29,7 @@ import './images/home.png'
 import './images/future.png'
 import './images/burger.png'
 
-
 // console.log('This is the JavaScript entry file - your code begins here.');
-
 
 let allTravelers;
 let oneTraveler;
@@ -46,10 +44,10 @@ let loginButton = document.querySelector(".login-button");//not being used yet
 let loginMobileBackground = document.querySelector(".whole-filter-section");//not being used yet
 let loginSection = document.querySelector(".main-login");//not being used yet
 let homePage = document.querySelector(".home");//not being used yet
-let presentPage = document.querySelector(".present");//not being used yet
-let futurePage = document.querySelector(".future");//not being used yet
-let pastPage = document.querySelector(".past");//not being used yet
-let pendingPage = document.querySelector(".pending");//not being used yet
+let present = document.querySelector(".present");//not being used yet
+let upcoming = document.querySelector(".upcoming");//not being used yet
+let past = document.querySelector(".past");//not being used yet
+let pending = document.querySelector(".pending");//not being used yet
 let allIcons = document.querySelector(".header-section");//not being used yet
 let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");//not being used yet
@@ -58,24 +56,25 @@ let travelersDurationPicker = document.querySelector(".travelers-duration-slider
 let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
 
-
-
-let onLoadContent = () => {
-  let promise1 = api.getTravelers()
-  let promise2 = api.getOneTraveler()
-  let promise3 = api.getAllTrips()
-  let promise4 = api.getAllDestinations()
-  Promise.all([promise1, promise2, promise3, promise4])
-    .then(values => {
-      allTravelers = values[0];
-      oneTraveler = values[1];
-      allTrips = values[2];
-      allDestinations = values[3];
-      generateTraveler();
-      generateDestination();
-      generateTrips();
-      populatePresentPage();
-    })
+let retrieveData = (event) => {
+  api.getAllServerData()
+  .then(values => {
+    allTravelers = values[0];
+    oneTraveler = values[1];
+    allTrips = values[2];
+    allDestinations = values[3];
+    generateTraveler();
+    generateDestination();
+    generateTrips();
+    if (event.type === 'load') {
+      populateHomeGreating();
+    }
+    generateDestinationPicker();
+    populateAllTitles();
+    populateAllPages();
+    displaySumbittedData();
+  })
+  .catch(err => console.log(err));
 }
 
 
@@ -101,46 +100,108 @@ let generateTrips = () => {
   tripsData = allTripStats;
 }
 
-let populatePresentPage = () => {
+let populateHomeGreating = () =>{
+    homePage.insertAdjacentHTML("afterbegin",
+      `<section class="page-header welcome-header">
+        <h2 class="page-title-text">
+          Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
+        </h2>
+       </section>`
+    )
+}
+
+let populateAllTitles = () =>{
+  let allCardPages = ["present", "upcoming", "past", "pending"];
+  allCardPages.forEach((page) => {
+    let targetDomObject = document.querySelector(`.${page}`)
+    targetDomObject.innerHTML +=
+      `<section class="page-header">
+        <h2 class="page-title-text">
+          Beer Traveler ${currentTraveler.name.split(" ")[0]}
+          This is Your ${page.charAt(0).toUpperCase() + page.slice(1)} Trips
+        </h2>
+       </section>`
+  })
+}
+
+let generateDestinationPicker = () => {
+  allDestinations.forEach((destinations, i) => {
+    if(destinations.destination !== "Rome, Italy")
+    destinationPicker.insertAdjacentHTML("afterbegin",
+      `<option value=${destinations.id}>${destinations.destination}</option>`
+    )
+  });
+}
+
+
+let populateAllPages = () => {
+  let allCardPages = ["present", "upcoming", "past", "pending"];
+  let currentDestinationImg;
+  currentTraveler.getUserTripData(tripsData);
   currentTraveler.loadTravelerPresent(tripsData);
-  currentTraveler.present.forEach((trip) => {
-    let currentDestinationImg = allDestinations.find((destination) => {
-      return trip.destinationID === destination.id
-    })
-    console.log(allDestinations);
-    let durationCount
-    let travelerCount
-    if (trip.duration >= 2) {
-      durationCount = "days of travling fun!"
+  currentTraveler.loadTravelerPast(tripsData);
+  currentTraveler.loadTravelerPending(tripsData);
+  currentTraveler.loadTravelerUpcoming(tripsData);
+  allCardPages.forEach((page) => {
+    let targetDomObject = document.querySelector(`.${page}`)
+    if(currentTraveler[page].length >= 1) {
+      currentTraveler[page].forEach((trip) => {
+        currentDestinationImg = allDestinations.find((destination) => {
+          return trip.destinationID === destination.id
+        })
+        trip.calculatePrice(allDestinations);
+        let durationCount
+        let travelerCount
+        if (trip.duration >= 2) {
+          durationCount = "days of travling fun!"
+        } else {
+          durationCount = "day quick get away!"
+        }
+        if (trip.travelers >= 2) {
+          travelerCount = "in your party of travelers!"
+        } else {
+          travelerCount = "awesome solo traveler!"
+        }
+        targetDomObject.innerHTML +=
+          `<section class="trip-cards">
+            <section class="trip-card-text">
+              <h3 class="populated-trip-price">
+                ${currentDestinationImg.destination}
+              </h3>
+              <p class="populated-trip-price">
+                The estimated cost of the trip is $${trip.price.toFixed(2)}
+              </p>
+              <p class="populated-trip-status">
+                Your trip status is in ${trip.status} status
+              </p>
+              <p class="populated-trip-duration">
+                The durtation of your trip is: ${trip.duration}
+              </p>
+              <p class="populated-trip-date">
+                You take off on ${trip.date}
+              </p>
+              <p class="populated-trip-travelers">
+                You have set this for: ${trip.travelers} ${travelerCount}
+              </p>
+            </section>
+            <img src= ${currentDestinationImg.image}
+              alt= ${currentDestinationImg.destination}
+              class="populated-trip-image"
+            >
+           </section>
+          `
+      });
     } else {
-      durationCount = "day quick get away!"
+      targetDomObject.innerHTML +=
+        `<section class="no-cards">
+            <p class="no-populated">
+              OH NOOO!!! <br> YOU HAVE NO ${page.toUpperCase()} TRIPS
+              <br> DON’T WORRY BE HOPPY AND
+              BOOK NOW!
+            </p>
+          </section>
+        `
     }
-    if (trip.travelers >= 2) {
-      travelerCount = "in your party of travelers!"
-    } else {
-      travelerCount = "awesome solo traveler!"
-    }
-    presentPage.innerHTML +=
-      `<p class="populated-trip-price">
-        The cost of the trip is $${trip.price.toFixed(2)}
-      </p>
-      <p class="populated-trip-status">
-        Your trip status is ${trip.status}
-      </p>
-      <p class="populated-trip-duration">
-        The durtation of your trip is: ${trip.duration}
-      </p>
-      <p class="populated-trip-date">
-        You take off on ${trip.date}
-      </p>
-      <p class="populated-trip-travelers">
-        You have set this for: ${trip.travelers} ${travelerCount}
-      </p>
-      <img src= ${currentDestinationImg.image}
-        alt= ${durationCount.destination}
-        class="populated-trip-image"
-      >
-      `
   });
 }
 
@@ -159,52 +220,67 @@ let captureSubmitedData = () => {
   }
 }
 
+let displaySumbittedData = () => {
+  let selectedDestination = allDestinations.find((destination) => {
+    return parseInt(destinationPicker.value) === destination.id
+  })
+  let currentTrip = new Trips(captureSubmitedData())
+  currentTrip.calculatePrice(allDestinations)
+  console.log(currentTrip.price.toFixed(2))
+  homePage.insertAdjacentHTML("beforeend",
+    `<p class="submited-trip-price">
+      Your Adventure to ${selectedDestination.destination} is estimated cost is
+        $${currentTrip.price.toFixed(2)} Clink Submit to request!
+    </p>
+    `
+  )
+}
+
 let submitRequest = () => {
   let newTrip = captureSubmitedData();
   api.addTrip(newTrip)
-    .then(response => response);
-     allTrips = api.getAllTrips();
-     generateTrips();
+    .then(response => response)
+    .then(() => retrieveData())
 }
 
 let selectPresentTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.remove("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.remove("hidden");
 }
 
 let selectFutureTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.remove("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.remove("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
 }
 
 let selectPastTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.remove("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  past.classList.remove("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
+  upcoming.classList.add("hidden");
 }
 
 let selectPendingTripsIcon = () => {
   homePage.classList.add("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.remove("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.remove("hidden");
+  present.classList.add("hidden");
 }
 
 let selectHomePageIcon = () => {
   homePage.classList.remove("hidden");
-  futurePage.classList.add("hidden");
-  pastPage.classList.add("hidden");
-  pendingPage.classList.add("hidden");
-  presentPage.classList.add("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
 }
 
 let selectNavIcon = () => {
@@ -223,7 +299,7 @@ let selectNavIcon = () => {
   }
 }
 
-window.addEventListener('load', onLoadContent);
+window.addEventListener('load', retrieveData);
 allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
 submitTrip.addEventListener('click', submitRequest);
