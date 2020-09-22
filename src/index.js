@@ -43,18 +43,18 @@ let password = document.querySelector(".password");//not being used yet
 let loginButton = document.querySelector(".login-button");//not being used yet
 let loginMobileBackground = document.querySelector(".whole-filter-section");//not being used yet
 let loginSection = document.querySelector(".main-login");//not being used yet
-let homePage = document.querySelector(".home");//not being used yet
-let present = document.querySelector(".present");//not being used yet
-let upcoming = document.querySelector(".upcoming");//not being used yet
-let past = document.querySelector(".past");//not being used yet
-let pending = document.querySelector(".pending");//not being used yet
-let allIcons = document.querySelector(".header-section");//not being used yet
+let homePage = document.querySelector(".home");
+let present = document.querySelector(".present");
+let upcoming = document.querySelector(".upcoming");
+let past = document.querySelector(".past");
+let pending = document.querySelector(".pending");
+let allIcons = document.querySelector(".header-section");
 let mobileIcons = document.querySelector(".moblie");//not being used yet
-let destinationPicker = document.querySelector(".destination-picker");//not being used yet
-let travelersNumberPicker = document.querySelector(".travelers-number-picker");//not being used yet
-let travelersDurationPicker = document.querySelector(".travelers-duration-slider");//not being used yet
+let destinationPicker = document.querySelector(".destination-picker");
+let travelersNumberPicker = document.querySelector(".travelers-number-picker");
+let travelersDurationPicker = document.querySelector(".travelers-duration-slider");
 let calenderPicker = document.querySelector(".calender");
-let submitTrip = document.querySelector(".submit-trip");//not being used yet
+let submitTrip = document.querySelector(".submit-trip");
 let submitEstimate = document.querySelector(".submit-estimate");
 
 
@@ -70,12 +70,13 @@ let retrieveData = (event) => {
     generateTrips();
     if(!event){
 
-    } else if (event.type === 'load') {
+    } else if (event.type === 'load') { //change this from load to click event
       populateHomeGreating();
     }
     generateDestinationPicker();
     populateAllTitles();
     populateAllPages();
+    populateYearlyCost();
   })
   .catch(err => console.log(err));
 }
@@ -110,6 +111,19 @@ let populateHomeGreating = () =>{
           Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
         </h2>
        </section>`
+    )
+}
+
+let populateYearlyCost = () =>{
+  currentTraveler.calculateTravelersTotalPrice(allDestinations)
+    homePage.insertAdjacentHTML("beforeend",
+      `<section class="yearly-cost">
+        <h3 class="page-title-text">
+          Your estimated annual travling cost is <br>
+          $${currentTraveler.travelersTotal.toFixed(2)}
+        </h3>
+       </section>
+      `
     )
 }
 
@@ -303,6 +317,14 @@ let selectPendingTripsIcon = () => {
 }
 
 let selectHomePageIcon = () => {
+  homePage.classList.remove("hidden");
+  upcoming.classList.add("hidden");
+  past.classList.add("hidden");
+  pending.classList.add("hidden");
+  present.classList.add("hidden");
+}
+
+let loadLoginPage = () => {
   homePage.classList.remove("hidden");
   upcoming.classList.add("hidden");
   past.classList.add("hidden");
