@@ -246,19 +246,19 @@ let successfullSubmitMessage = (response) => {
   if(response.message.includes("successfully")) {
     homePage.insertAdjacentHTML("beforeend",
       `<p class="submited-trip-price">
-        Your Adventure has been submited checkout your pending trips for details
+        Your Adventure has been submited, checkout your pending trips for details
       </p>
       `
     )
   } else {
     homePage.insertAdjacentHTML("beforeend",
       `<p class="submited-trip-price">
-        Opps something went wrong please call us at 555-867-5309 and ask for Jenny
+        Opps something went wrong please call us at 555-867-53O9 and ask for Jenny
       </p>
       `
     )
   };
-  submitEstimate.removeEventListener('click', displaySumbittedEstimate)
+  submitEstimate.disabled = true;
 }
 
 let submitRequest = () => {
