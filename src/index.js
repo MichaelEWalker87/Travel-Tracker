@@ -237,15 +237,23 @@ let populateAllPages = () => {
 let captureSubmitedData = () => {
   let calenderDate = calenderPicker.value.split("-")
   let formatedDate = calenderDate.join("/")
-  return {
-    id: Date.now(),
-    userID: currentTraveler.id,
-    destinationID: parseInt(destinationPicker.value),
-    travelers: parseInt(travelersNumberPicker.value),
-    date: formatedDate,
-    duration: parseInt(travelersDurationPicker.value),
-    status: 'pending',
-    suggestedActivities: []
+  let currentDay = new Date(Date.now())
+  let calenderCheck = new Date(formatedDate)
+  if (calenderCheck > currentDay) {
+    return {
+      id: Date.now(),
+      userID: currentTraveler.id,
+      destinationID: parseInt(destinationPicker.value),
+      travelers: parseInt(travelersNumberPicker.value),
+      date: formatedDate,
+      duration: parseInt(travelersDurationPicker.value),
+      status: 'pending',
+      suggestedActivities: []
+    }
+  } else {
+    submitEstimate.classList.remove("hidden");
+    submitTrip.classList.add("hidden");
+    alert("You have entered an invailed date please try again")
   }
 }
 
