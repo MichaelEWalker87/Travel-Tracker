@@ -3,7 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-import Destinations from './trips';
+import Destinations from './destinations';
 import Travelers from './travelers';
 import Trips from './trips';
 import api from './api';
@@ -50,11 +50,12 @@ let presentPage = document.querySelector(".present");//not being used yet
 let futurePage = document.querySelector(".future");//not being used yet
 let pastPage = document.querySelector(".past");//not being used yet
 let pendingPage = document.querySelector(".pending");//not being used yet
-let allIcons = document.querySelectorAll(".icon");//not being used yet
+let allIcons = document.querySelector(".header-section");//not being used yet
 let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");//not being used yet
 let travelersNumberPicker = document.querySelector(".travelers-number-picker");//not being used yet
 let travelersDurationPicker = document.querySelector(".travelers-duration-slider");//not being used yet
+let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
 
 
@@ -73,15 +74,13 @@ let onLoadContent = () => {
       generateTraveler();
       generateDestination();
       generateTrips();
+      populatePresentPage();
     })
 }
 
-let selectIcon = (event) => {
-  let pickIcon = event.target.closest('.icon');
-}
 
 let generateTraveler = () =>{
-  let currentTraveler = new Travelers(oneTraveler)
+  currentTraveler = new Travelers(oneTraveler)
 }
 
 let generateDestination = () =>{
@@ -102,9 +101,129 @@ let generateTrips = () => {
   tripsData = allTripStats;
 }
 
-let getData = () => {
-  
+let populatePresentPage = () => {
+  currentTraveler.loadTravelerPresent(tripsData);
+  currentTraveler.present.forEach((trip) => {
+    let currentDestinationImg = allDestinations.find((destination) => {
+      return trip.destinationID === destination.id
+    })
+    console.log(allDestinations);
+    let durationCount
+    let travelerCount
+    if (trip.duration >= 2) {
+      durationCount = "days of travling fun!"
+    } else {
+      durationCount = "day quick get away!"
+    }
+    if (trip.travelers >= 2) {
+      travelerCount = "in your party of travelers!"
+    } else {
+      travelerCount = "awesome solo traveler!"
+    }
+    presentPage.innerHTML +=
+      `<p class="populated-trip-price">
+        The cost of the trip is $${trip.price.toFixed(2)}
+      </p>
+      <p class="populated-trip-status">
+        Your trip status is ${trip.status}
+      </p>
+      <p class="populated-trip-duration">
+        The durtation of your trip is: ${trip.duration}
+      </p>
+      <p class="populated-trip-date">
+        You take off on ${trip.date}
+      </p>
+      <p class="populated-trip-travelers">
+        You have set this for: ${trip.travelers} ${travelerCount}
+      </p>
+      <img src= ${currentDestinationImg.image}
+        alt= ${durationCount.destination}
+        class="populated-trip-image"
+      >
+      `
+  });
 }
+
+let captureSubmitedData = () => {
+  let calenderDate = calenderPicker.value.split("-")
+  let formatedDate = calenderDate.join("/")
+  return {
+    id: Date.now(),
+    userID: 2,
+    destinationID: parseInt(destinationPicker.value),
+    travelers: parseInt(travelersNumberPicker.value),
+    date: formatedDate,
+    duration: parseInt(travelersDurationPicker.value),
+    status: 'pending',
+    suggestedActivities: []
+  }
+}
+
+let submitRequest = () => {
+  let newTrip = captureSubmitedData();
+  api.addTrip(newTrip)
+    .then(response => response);
+     allTrips = api.getAllTrips();
+     generateTrips();
+}
+
+let selectPresentTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.remove("hidden");
+}
+
+let selectFutureTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.remove("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectPastTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.remove("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectPendingTripsIcon = () => {
+  homePage.classList.add("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.remove("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectHomePageIcon = () => {
+  homePage.classList.remove("hidden");
+  futurePage.classList.add("hidden");
+  pastPage.classList.add("hidden");
+  pendingPage.classList.add("hidden");
+  presentPage.classList.add("hidden");
+}
+
+let selectNavIcon = () => {
+  if(event.target.classList.contains('present-trips')) {
+    selectPresentTripsIcon();
+  } else if (event.target.classList.contains('home-page')) {
+    selectHomePageIcon();
+  } else if (event.target.classList.contains('future-trips')) {
+    selectFutureTripsIcon();
+  } else if (event.target.classList.contains('pending-trips')) {
+    selectPendingTripsIcon();
+  } else if (event.target.classList.contains('past-trips')) {
+    selectPastTripsIcon();
+  } else if (event.target.classList.contains('moblie-icon')) {
+    console.log("moblie-icon")
+  }
+}
+
 window.addEventListener('load', onLoadContent);
-// allIcons.addEventListener('click', );
+allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
+submitTrip.addEventListener('click', submitRequest);

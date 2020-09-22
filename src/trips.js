@@ -13,24 +13,21 @@ class Trips {
     this.price = 0;
     this.agentFee = 0;
     this.endDate = moment(this.date, "YYYY/MM/DD")
-                    .add(this.duration, 'days')
-                    .format("YYYY/MM/DD");
+                   .add(this.duration, 'days')
+                   .format("YYYY/MM/DD");
   }
 
   calculatePrice(destinationData) {
-    let selectedDestination = destinationData.find(destination => {
+    let selectedDestination = destinationData.find((destination, i) => {
       return  this.destinationID === destination.id
     })
-
     let cost = (
-
       (this.duration * selectedDestination.estimatedLodgingCostPerDay * this.travelers)
       +
       (this.travelers * selectedDestination.estimatedFlightCostPerPerson)
     )
-    // console.log(cost)
+    // console.log("what's going on I said heeeey", cost)
     let agentFeeNumber = (cost * 0.10);
-    // console.log(agentFeeNumber)
     this.agentFee = (Math.round(((cost * 0.10)* 100)) / 100);
     let totalPrice = (Math.round(((cost + agentFeeNumber) * 100)) / 100)
     this.price = totalPrice;

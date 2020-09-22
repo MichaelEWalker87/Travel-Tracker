@@ -2,13 +2,22 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import Trips from '../src/trips';
-import Destinations from '../src/trips';
+import Destinations from '../src/destinations';
 import tripsData from '../src/data/trips-data';
 import destinationData from '../src/data/destinations-data';
 
 describe('Trips', () => {
-  let trip, trip2, trip3;
+  let trip, trip2, trip3, destinationsInstantiated, destination1, destination2;
+  let destination3, destination4, destination5, destination6;
   beforeEach(() => {
+    destinationsInstantiated = [
+      destination1 = new Destinations(destinationData[0]),
+      destination2 = new Destinations(destinationData[1]),
+      destination3 = new Destinations(destinationData[2]),
+      destination4 = new Destinations(destinationData[3]),
+      destination5 = new Destinations(destinationData[4]),
+      destination6 = new Destinations(destinationData[5]),
+    ];
     trip = new Trips(tripsData[0]);
     trip2 = new Trips(tripsData[1]);
     trip3 = new Trips(tripsData[2]);
@@ -76,13 +85,13 @@ describe('Trips', () => {
   describe('Methods of Trips', () => {
 
     it("should be able to calculate the price for a trip", () => {
-      trip.calculatePrice(destinationData)
+      trip.calculatePrice(destinationsInstantiated)
       expect(trip.price).to.be.equal(12969);
     });
 
     it("should be able to calculate the agentFee for a trip", () => {
-      trip.calculatePrice(destinationData)
+      trip.calculatePrice(destinationsInstantiated)
       expect(trip.agentFee).to.be.equal(1179);
-    }); 
+    });
   });
 });
