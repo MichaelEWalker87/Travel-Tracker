@@ -273,12 +273,14 @@ let displaySumbittedEstimate = () => {
   let selectedDestination = allDestinations.find((destination) => {
     return parseInt(destinationPicker.value) === destination.id
   })
-  let currentTrip = new Trips(captureSubmitedData())
-  currentTrip.calculatePrice(allDestinations)
-  submitedTripPrice.innerText =
-    `  Your Adventure to ${selectedDestination.destination} is estimated cost is
-        $${currentTrip.price.toFixed(2)} Clink Submit to request!
-    `
+  if(captureSubmitedData() !== undefined) {
+    let currentTrip = new Trips(captureSubmitedData())
+    currentTrip.calculatePrice(allDestinations)
+    submitedTripPrice.innerText =
+      `  Your Adventure to ${selectedDestination.destination} is estimated cost is
+          $${currentTrip.price.toFixed(2)} Clink Submit to request!
+      `
+  }
 }
 
 let successfullSubmitMessage = (response) => {
