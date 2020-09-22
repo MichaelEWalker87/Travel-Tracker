@@ -60,7 +60,7 @@ let submitEstimate = document.querySelector(".submit-estimate");
 
 
 let retrieveData = (event) => {
-  api.getAllServerData(userNumber)
+  api.getAllServerData(userNumber, event)
   .then(values => {
     allTravelers = values[0];
     oneTraveler = values[1];
@@ -69,11 +69,11 @@ let retrieveData = (event) => {
     generateTraveler();
     generateDestination();
     generateTrips();
-    if(!event){
-
-    } else if (event.type === 'load') { //change this from load to click event
-      addDisplayLogin();
-    }
+    // if(!event){
+    //
+    // } else if (event.type === 'load') { //change this from load to click event
+    //   console.log(event.type)
+    // }
     populateHomeGreating();
     generateDestinationPicker();
     populateAllTitles();
@@ -136,7 +136,7 @@ let generateTrips = () => {
 
 let populateHomeGreating = () =>{
     homePage.insertAdjacentHTML("afterbegin",
-      `<section class="page-header welcome-header">
+      `<section class="welcome-header">
         <h2 class="page-title-text">
           Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
         </h2>
@@ -149,7 +149,7 @@ let populateYearlyCost = () =>{
     homePage.insertAdjacentHTML("beforeend",
       `<section class="yearly-cost">
         <h3 class="page-title-text">
-          Your estimated annu-ale travling cost is <br>
+          Your estimated annu-Ale travling cost is <br>
           $${currentTraveler.travelersTotal.toFixed(2)}
         </h3>
        </section>
@@ -306,11 +306,15 @@ let successfullSubmitMessage = (response) => {
 }
 
 let submitRequest = () => {
-  submitEstimate.classList.remove("hidden");
+  let welcomeHeader = document.querySelector(".welcome-header");
+  let yearlyCost = document.querySelector(".yearly-cost");
+  submitEstimate.classList.add("hidden");
   submitTrip.classList.add("hidden");
   let newTrip = captureSubmitedData();
   api.addTrip(newTrip)
     .then(response => successfullSubmitMessage(response))
+    .then(() => welcomeHeader.remove())
+    .then(() => yearlyCost.remove())
     .then(() => retrieveData())
 }
 

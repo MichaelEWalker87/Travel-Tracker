@@ -3,7 +3,6 @@ import userNumber from './index.js';
 let api = {
 
   getAllServerData(userNumber) {
-    console.log("ass", userNumber)
     let allTravelersAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers');
     let oneTravelerAPI = fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${userNumber}`);
     let allTripsAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips');
