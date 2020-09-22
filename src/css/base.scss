@@ -103,12 +103,15 @@ body {
   border-color: $blue-Title;
   border-style: outset;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active{
   color: $white-Icon-Text;
   font-size: .9rem;
   text-shadow: 0px 2px 4px $header-shadow;
   transition: .4s ease;
-}
+  }
+
 }
 
 // main-login
