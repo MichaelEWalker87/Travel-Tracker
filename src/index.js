@@ -55,6 +55,8 @@ let travelersNumberPicker = document.querySelector(".travelers-number-picker");/
 let travelersDurationPicker = document.querySelector(".travelers-duration-slider");//not being used yet
 let calenderPicker = document.querySelector(".calender");
 let submitTrip = document.querySelector(".submit-trip");//not being used yet
+let submitEstimate = document.querySelector(".submit-estimate");
+
 
 let retrieveData = (event) => {
   api.getAllServerData()
@@ -66,13 +68,14 @@ let retrieveData = (event) => {
     generateTraveler();
     generateDestination();
     generateTrips();
-    if (event.type === 'load') {
+    if(!event){
+
+    } else if (event.type === 'load') {
       populateHomeGreating();
     }
     generateDestinationPicker();
     populateAllTitles();
     populateAllPages();
-    displaySumbittedData();
   })
   .catch(err => console.log(err));
 }
@@ -220,13 +223,14 @@ let captureSubmitedData = () => {
   }
 }
 
-let displaySumbittedData = () => {
+let displaySumbittedEstimate = () => {
+  submitEstimate.classList.add("hidden");
+  submitTrip.classList.remove("hidden");
   let selectedDestination = allDestinations.find((destination) => {
     return parseInt(destinationPicker.value) === destination.id
   })
   let currentTrip = new Trips(captureSubmitedData())
   currentTrip.calculatePrice(allDestinations)
-  console.log(currentTrip.price.toFixed(2))
   homePage.insertAdjacentHTML("beforeend",
     `<p class="submited-trip-price">
       Your Adventure to ${selectedDestination.destination} is estimated cost is
@@ -236,10 +240,33 @@ let displaySumbittedData = () => {
   )
 }
 
+let successfullSubmitMessage = (response) => {
+  let submitedTripPrice = document.querySelector(".submited-trip-price");
+  submitedTripPrice.remove()
+  if(response.message.includes("successfully")) {
+    homePage.insertAdjacentHTML("beforeend",
+      `<p class="submited-trip-price">
+        Your Adventure has been submited checkout your pending trips for details
+      </p>
+      `
+    )
+  } else {
+    homePage.insertAdjacentHTML("beforeend",
+      `<p class="submited-trip-price">
+        Opps something went wrong please call us at 555-867-5309 and ask for Jenny
+      </p>
+      `
+    )
+  };
+  submitEstimate.removeEventListener('click', displaySumbittedEstimate)
+}
+
 let submitRequest = () => {
+  submitEstimate.classList.remove("hidden");
+  submitTrip.classList.add("hidden");
   let newTrip = captureSubmitedData();
   api.addTrip(newTrip)
-    .then(response => response)
+    .then(response => successfullSubmitMessage(response))
     .then(() => retrieveData())
 }
 
@@ -303,3 +330,4 @@ window.addEventListener('load', retrieveData);
 allIcons.addEventListener('click', selectNavIcon);
 // loginButton.addEventListener('click', );
 submitTrip.addEventListener('click', submitRequest);
+submitEstimate.addEventListener('click', displaySumbittedEstimate);

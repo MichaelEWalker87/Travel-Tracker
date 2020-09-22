@@ -12,6 +12,8 @@ $pale-blue-background-header: hsla(210, 38%, 86%, .5);
 $text-color-home:hsla(195, 5%, 15%, 1);
 $card-background:hsla(195, 95%, 25%, 0.9);
 
+
+
 %input {
   font-size: 1.5rem;
   background-color:$white-input-background;
@@ -204,6 +206,8 @@ body {
   font-size: 1.28rem;
   @extend .submit-trip;
 }
+
+
 // cards
 
 .populated-trip-image {
