@@ -1,8 +1,11 @@
+import userNumber from './index.js';
+
 let api = {
 
-  getAllServerData() {
+  getAllServerData(userNumber) {
+    console.log("ass", userNumber)
     let allTravelersAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers');
-    let oneTravelerAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/2');
+    let oneTravelerAPI = fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${userNumber}`);
     let allTripsAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips');
     let allDestinationsAPI = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations');
     let promises = [allTravelersAPI, oneTravelerAPI, allTripsAPI, allDestinationsAPI];
@@ -20,7 +23,6 @@ let api = {
       body: JSON.stringify(newTrip),
     })
       .then (response => response.json())
-      .then ( )
       .catch(err => console.log(err));
     return promise;
   },

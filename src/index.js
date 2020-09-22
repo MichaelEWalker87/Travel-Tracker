@@ -37,6 +37,7 @@ let allTrips;
 let allDestinations;
 let currentTraveler;
 let tripsData;
+let userNumber = 2;
 
 let username = document.querySelector(".username");//not being used yet
 let password = document.querySelector(".password");//not being used yet
@@ -59,7 +60,7 @@ let submitEstimate = document.querySelector(".submit-estimate");
 
 
 let retrieveData = (event) => {
-  api.getAllServerData()
+  api.getAllServerData(userNumber)
   .then(values => {
     allTravelers = values[0];
     oneTraveler = values[1];
@@ -69,11 +70,11 @@ let retrieveData = (event) => {
     generateDestination();
     generateTrips();
     if(!event){
-      addDisplayLogin();
+
     } else if (event.type === 'load') { //change this from load to click event
       addDisplayLogin();
-      populateHomeGreating();
     }
+    populateHomeGreating();
     generateDestinationPicker();
     populateAllTitles();
     populateAllPages();
@@ -88,12 +89,28 @@ let retrieveData = (event) => {
 let addDisplayLogin = () => {
   loginMobileBackground.classList.remove("hidden");
   loginSection.classList.remove("hidden");
+  homePage.classList.add("hidden");
 }
 
 let removeDisplayLogin = () => {
   loginMobileBackground.classList.add("hidden");
   loginSection.classList.add("hidden");
+  homePage.classList.remove("hidden");
 }
+
+let verifyLogin = () => {
+  const userString = username.value.split('traveler');
+  userNumber = parseInt(userString[1])
+  if (password.value === "travel2020" && userString[0] === "" && userNumber <= 50 && userNumber >= 1) {
+    console.log(userNumber)
+    removeDisplayLogin();
+    retrieveData();
+    return userNumber
+  } else {
+    alert("You have entered the wrong password or username please try again")
+  }
+}
+
 
 let generateTraveler = () => {
   currentTraveler = new Travelers(oneTraveler)
@@ -366,8 +383,8 @@ let selectNavIcon = () => {
   }
 }
 
-window.addEventListener('load', retrieveData);
+window.addEventListener('load', addDisplayLogin);
 allIcons.addEventListener('click', selectNavIcon);
-// loginButton.addEventListener('click', );
+loginButton.addEventListener('click', verifyLogin);
 submitTrip.addEventListener('click', submitRequest);
 submitEstimate.addEventListener('click', displaySumbittedEstimate);
