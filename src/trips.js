@@ -2,13 +2,13 @@ import moment from 'moment';
 
 class Trips {
   constructor(trip) {
-    this.id = trip.id;  // number
-    this.userID = trip.userID;  // number
-    this.destinationID = trip.destinationID
-    this.travelers = trip.travelers;  // number
-    this.date = trip.date;  // string
-    this.duration = trip.duration; // number
-    this.status = trip.status || "pending"; // string
+    this.id = trip.id;
+    this.userID = trip.userID;
+    this.destinationID = trip.destinationID;
+    this.travelers = trip.travelers;
+    this.date = trip.date;
+    this.duration = trip.duration;
+    this.status = trip.status || "pending"; 
     this.suggestedActivities = trip.suggestedActivities ; // array
     this.price = 0;
     this.agentFee = 0;
