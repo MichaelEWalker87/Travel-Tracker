@@ -77,5 +77,6 @@ class Travelers {
     }, 0);
     this.travelersTotal = yearlyTotal;
   };
+}
 
 export default Travelers;
