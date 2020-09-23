@@ -1,11 +1,11 @@
 class Destinations {
   constructor(getAway) {
-    this.id = getAway.id;  // number
-    this.destination = getAway.destination;  // number
-    this.estimatedLodgingCostPerDay = getAway.estimatedLodgingCostPerDay;  // number
-    this.estimatedFlightCostPerPerson = getAway.estimatedFlightCostPerPerson; //number
-    this.image = getAway.image //string
-    this.alt = getAway.alt //string
+    this.id = getAway.id;
+    this.destination = getAway.destination;
+    this.estimatedLodgingCostPerDay = getAway.estimatedLodgingCostPerDay;
+    this.estimatedFlightCostPerPerson = getAway.estimatedFlightCostPerPerson;
+    this.image = getAway.image
+    this.alt = getAway.alt 
   }
 }
 
