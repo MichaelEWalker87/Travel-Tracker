@@ -1,0 +1,31 @@
+@media screen and (max-width: 760px) {
+
+.header-section {
+  display: flow-root;
+}
+
+.login-entry {
+  bottom: 5rem;
+}
+
+.logo-login {
+  width: 11rem;
+  padding: 5rem;
+}
+
+.home{
+  margin: 0;
+  margin-top: 2rem;
+}
+
+.trip-cards{
+  display: flow-root;
+  text-align: center;
+}
+
+.populated-trip-image{
+  width: 22rem;
+  height: auto;
+}
+
+}

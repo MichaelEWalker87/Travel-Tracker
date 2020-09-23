@@ -1,0 +1,53 @@
+.main-login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  place-content: center;
+  z-index: 10;
+}
+
+.login-entry{
+  position: absolute;
+  text-align: center;
+  font-family: $main-font;
+  color: $white-Icon-Text;
+  font-size: 1.8rem;
+  padding: 1rem;
+  background-color:$card-background;
+  border-color: $icon-blue;
+  border-style: inset;
+  border-radius: 1rem;
+  margin-top: 8rem;
+}
+
+.username {
+  @extend %input;
+}
+
+.password {
+  @extend %input;
+}
+.login-button {
+  @extend %input;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &:hover{
+    color: $text-color-home;
+    font-size: 2rem;
+    text-shadow: 0px 2px 4px $header-shadow;
+    transition: .4s ease;
+  }
+}
+
+.whole-filter-section {
+  background-color: $header-shadow;
+  opacity: 100%;
+  overflow: auto;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
+}

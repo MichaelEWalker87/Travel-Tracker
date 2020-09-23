@@ -2,17 +2,17 @@ import moment from 'moment';
 
 class Travelers {
   constructor(traveler) {
-    this.id = traveler.id; //(number)
-    this.travelerType = traveler.travelerType; //(string)
+    this.id = traveler.id;
+    this.travelerType = traveler.travelerType;
     this.name = traveler.name;
-    this.username = `traveler${this.id}`; // (string) traveler.userName
-    this.password = "travel2020"; // (string) traveler.password
+    this.username = `traveler${this.id}`;
+    this.password = "travel2020";
     this.userTotalTrips = [];
-    this.past = []; //  ([] of {}) traveler.past
-    this.present = []; // ([] of {}) traveler.present
-    this.upcoming = []; // ([] of {}) traveler.upcoming
-    this.pending = []; // ([] of {}) traveler.pending
-    this.travelersTotal = 0; //(number) traveler.travelersTotal
+    this.past = [];
+    this.present = [];
+    this.upcoming = [];
+    this.pending = [];
+    this.travelersTotal = 0;
   };
 
   getUserTripData(tripsData) {
@@ -76,14 +76,6 @@ class Travelers {
        return total
     }, 0);
     this.travelersTotal = yearlyTotal;
-  };
-
-  userNameUpdate() {
-
-  };
-
-  passwordUpdate() {
-
   };
 }
 
