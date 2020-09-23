@@ -44,7 +44,7 @@ body {
 }
 
 .logo-login{
-  width: 60%;
+  width: 44rem;
 }
 
 .logo-section {
@@ -226,7 +226,6 @@ body {
   @extend .submit-trip;
 }
 
-
 // cards
 
 .populated-trip-image {
@@ -274,5 +273,39 @@ body {
   background: $card-background;
   text-align: center;
   padding: 3rem;
-  @extend .trip-card-text
+  @extend .trip-card-text;
+}
+
+//mobile
+
+@media screen and (max-width: 760px) {
+
+.header-section {
+  display: flow-root;
+}
+
+.login-entry {
+  bottom: 5rem;
+}
+
+.logo-login {
+  width: 11rem;
+  padding: 5rem;
+}
+
+.home{
+  margin: 0;
+  margin-top: 2rem;
+}
+
+.trip-cards{
+  display: flow-root;
+  text-align: center;
+}
+
+.populated-trip-image{
+  width: 22rem;
+  height: auto;
+}
+
 }
