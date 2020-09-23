@@ -1,0 +1,30 @@
+
+$title-font: 'Righteous', cursive;
+$main-font: 'Cabin', sans-serif;
+
+$white-Icon-Text: hsla(23, 15%, 95%, 1);
+$white-input-background: hsla(23, 15%, 95%, .8);
+$header-shadow: hsla(360, 5%, 0%, .6);
+$icon-blue: hsla(195, 95%, 25%, .5);
+$blue-Title: hsla(195, 95%, 25%, 1);
+$pale-blue-background-header: hsla(210, 38%, 86%, .5);
+$text-color-home:hsla(195, 5%, 15%, 1);
+$card-background:hsla(195, 95%, 25%, 0.9);
+
+%input {
+  margin: 2rem;
+  font-size: 1.7rem;
+  background-color:$white-input-background;
+}
+
+body {
+  margin: 0;
+  background-image: url(../images/honghong.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hidden {
+  display: none !important;
+}

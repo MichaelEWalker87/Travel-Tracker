@@ -1,0 +1,48 @@
+.home {
+  text-align: center;
+  font-family: $main-font;
+  margin: 8rem;
+  font-size: 1.5rem;
+  background-color: $white-input-background;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: $text-color-home;
+}
+
+
+.home-input-form {
+  margin-bottom: 1rem;
+  font-family: $main-font;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.home-input {
+  padding-right: 1rem;
+  font-size: 2rem;
+  color: $text-color-home;
+}
+
+
+.start-date-title {
+  font-size: 2rem;
+}
+
+.calender {
+  font-family: $main-font;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.submit-trip {
+  cursor: pointer;
+  background-color: $blue-Title;
+  color: $white-Icon-Text;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.submit-estimate {
+  font-size: 1.28rem;
+  @extend .submit-trip;
+}

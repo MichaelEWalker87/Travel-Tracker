@@ -1,0 +1,47 @@
+.populated-trip-image {
+  size: 10rem;
+  width: 29rem;
+  height: 27rem;
+  padding: 1rem;
+  border-radius: 3rem;
+}
+
+.trip-cards {
+  display: flex;
+  flex-direction: row-reverse;
+  background: $card-background;
+  margin: 1rem;
+  border-radius: 1rem;
+  justify-content: space-around;
+}
+
+.page-title-text{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  background: $card-background;
+  color: $white-Icon-Text;
+  text-align: center;
+  align-self: center;
+  font-family: $main-font;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.trip-card-text {
+  align-self: center;
+  font-family: $main-font;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  color: $white-Icon-Text;
+  background-color: $header-shadow;
+}
+
+.no-populated {
+  background: $card-background;
+  text-align: center;
+  padding: 3rem;
+  @extend .trip-card-text;
+}
