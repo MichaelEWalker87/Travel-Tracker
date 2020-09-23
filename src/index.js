@@ -1,14 +1,9 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import Destinations from './destinations';
 import Travelers from './travelers';
 import Trips from './trips';
 import api from './api';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/beer.png'
 import './images/hop.png'
 import './images/Desert.jpg'
@@ -29,8 +24,6 @@ import './images/home.png'
 import './images/future.png'
 import './images/burger.png'
 
-// console.log('This is the JavaScript entry file - your code begins here.');
-
 let allTravelers;
 let oneTraveler;
 let allDestinations;
@@ -38,18 +31,17 @@ let currentTraveler;
 let tripsData = [];
 let userNumber = 2;
 
-let username = document.querySelector(".username");//not being used yet
-let password = document.querySelector(".password");//not being used yet
-let loginButton = document.querySelector(".login-button");//not being used yet
-let loginMobileBackground = document.querySelector(".whole-filter-section");//not being used yet
-let loginSection = document.querySelector(".main-login");//not being used yet
+let username = document.querySelector(".username");
+let password = document.querySelector(".password");
+let loginButton = document.querySelector(".login-button");
+let loginMobileBackground = document.querySelector(".whole-filter-section");
+let loginSection = document.querySelector(".main-login");
 let homePage = document.querySelector(".home");
 let present = document.querySelector(".present");
 let upcoming = document.querySelector(".upcoming");
 let past = document.querySelector(".past");
 let pending = document.querySelector(".pending");
 let allIcons = document.querySelector(".header-section");
-let mobileIcons = document.querySelector(".moblie");//not being used yet
 let destinationPicker = document.querySelector(".destination-picker");
 let travelersNumberPicker = document.querySelector(".travelers-number-picker");
 let travelersDurationPicker = document.querySelector(".travelers-duration-slider");
@@ -108,7 +100,7 @@ let generateTraveler = () => {
 }
 
 let generateDestination = () =>{
-  let finalDestination = allDestinations.destinations.reduce((totalDestination, destination) =>{
+  let finalDestination = allDestinations.destinations.reduce((totalDestination, destination) => {
     let  currentDestination = new Destinations(destination);
     totalDestination.push(currentDestination)
     return totalDestination
@@ -116,14 +108,14 @@ let generateDestination = () =>{
   allDestinations = finalDestination;
 }
 
-let populateHomeGreating = () =>{
+let populateHomeGreating = () => {
   let pageTitleText = document.querySelector(".page-title-text");
   pageTitleText.innerText =
     `Welcome Beer Traveler ${currentTraveler.name.split(" ")[0]} Book Your Next Adventure Below
     `
 }
 
-let populateYearlyCost = () =>{
+let populateYearlyCost = () => {
   let yearlyCostText = document.querySelector(".yearly-cost-text");
   currentTraveler.calculateTravelersTotalPrice(allDestinations)
   yearlyCostText.innerHTML =
@@ -132,7 +124,7 @@ let populateYearlyCost = () =>{
     `
 }
 
-let populateAllTitles = () =>{
+let populateAllTitles = () => {
   let allCardPages = ["present", "upcoming", "past", "pending"];
   allCardPages.forEach((page) => {
     let targetDomObject = document.querySelector(`.${page}`)
@@ -374,8 +366,6 @@ let selectNavIcon = () => {
     selectPendingTripsIcon();
   } else if (event.target.classList.contains('past-trips')) {
     selectPastTripsIcon();
-  } else if (event.target.classList.contains('moblie-icon')) {
-    // console.log("moblie-icon")
   }
 }
 
