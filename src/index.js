@@ -237,15 +237,23 @@ let populateAllPages = () => {
 let captureSubmitedData = () => {
   let calenderDate = calenderPicker.value.split("-")
   let formatedDate = calenderDate.join("/")
-  return {
-    id: Date.now(),
-    userID: currentTraveler.id,
-    destinationID: parseInt(destinationPicker.value),
-    travelers: parseInt(travelersNumberPicker.value),
-    date: formatedDate,
-    duration: parseInt(travelersDurationPicker.value),
-    status: 'pending',
-    suggestedActivities: []
+  let currentDay = new Date(Date.now())
+  let calenderCheck = new Date(formatedDate)
+  if (calenderCheck > currentDay) {
+    return {
+      id: Date.now(),
+      userID: currentTraveler.id,
+      destinationID: parseInt(destinationPicker.value),
+      travelers: parseInt(travelersNumberPicker.value),
+      date: formatedDate,
+      duration: parseInt(travelersDurationPicker.value),
+      status: 'pending',
+      suggestedActivities: []
+    }
+  } else {
+    submitEstimate.classList.remove("hidden");
+    submitTrip.classList.add("hidden");
+    alert("You have entered an invailed date please try again")
   }
 }
 
@@ -265,12 +273,14 @@ let displaySumbittedEstimate = () => {
   let selectedDestination = allDestinations.find((destination) => {
     return parseInt(destinationPicker.value) === destination.id
   })
-  let currentTrip = new Trips(captureSubmitedData())
-  currentTrip.calculatePrice(allDestinations)
-  submitedTripPrice.innerText =
-    `  Your Adventure to ${selectedDestination.destination} is estimated cost is
-        $${currentTrip.price.toFixed(2)} Clink Submit to request!
-    `
+  if(captureSubmitedData() !== undefined) {
+    let currentTrip = new Trips(captureSubmitedData())
+    currentTrip.calculatePrice(allDestinations)
+    submitedTripPrice.innerText =
+      `  Your Adventure to ${selectedDestination.destination} is estimated cost is
+          $${currentTrip.price.toFixed(2)} Clink Submit to request!
+      `
+  }
 }
 
 let successfullSubmitMessage = (response) => {
